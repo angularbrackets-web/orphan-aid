@@ -1,0 +1,61 @@
+---
+const trustPoints = [
+  {
+    stat: 'Registered',
+    detail: 'Canadian Charity',
+    note: 'Registration No. #891782436 RR 0001',
+  },
+  {
+    stat: '100%',
+    detail: 'Sponsorships Reach the Child',
+    note: 'Overhead costs covered separately',
+  },
+  {
+    stat: 'Community',
+    detail: 'Governed & Accountable',
+    note: 'Founded by families, run for families',
+  },
+]
+---
+
+<section class="section bg-bg-subtle" aria-label="Why trust Orphan Aid">
+  <div class="container">
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0 items-start">
+
+      <!-- Left: Heading -->
+      <div class="lg:col-span-4 aos" data-reveal="wipe">
+        <p class="label mb-4">Why trust us</p>
+        <h2 class="h2 text-ink">
+          Accountable.<br />Transparent.<br />Trusted.
+        </h2>
+      </div>
+
+      <!-- Right: Trust points — typography-forward -->
+      <div class="lg:col-span-7 lg:col-start-6 space-y-10">
+        {trustPoints.map((point, i) => (
+          <div class="aos flex gap-8 items-start" data-delay={String(i * 0.1)}>
+            <!-- Vertical gold line -->
+            <div class="flex-shrink-0 pt-1" aria-hidden="true">
+              <div class="w-px bg-gold" style="height: 3rem;"></div>
+            </div>
+            <div>
+              <p
+                class="font-heading text-ink mb-1"
+                style="font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -0.02em; line-height: 1.1;"
+              >
+                {point.stat}{' '}
+                <span class="font-body" style="font-family: var(--font-body); font-size: 1rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.7;">
+                  {point.detail}
+                </span>
+              </p>
+              <p class="font-body text-sm text-ink-muted">{point.note}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+
+  </div>
+</section>

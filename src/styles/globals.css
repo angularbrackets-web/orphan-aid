@@ -1,0 +1,187 @@
+/* Fontsource imports */
+@import '@fontsource-variable/cormorant';
+@import '@fontsource-variable/dm-sans';
+
+/* Design tokens */
+@import './tokens.css';
+
+/* Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: auto; /* Lenis handles smooth scroll */
+  }
+
+  body {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    text-wrap: balance;
+  }
+
+  /* Focus styles — never outline: none */
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Container */
+  .container {
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--container-px-mobile);
+    padding-right: var(--container-px-mobile);
+  }
+
+  @screen lg {
+    .container {
+      padding-left: var(--container-px-desktop);
+      padding-right: var(--container-px-desktop);
+    }
+  }
+
+  /* Section padding */
+  .section {
+    padding-top: var(--section-padding-mobile);
+    padding-bottom: var(--section-padding-mobile);
+  }
+
+  @screen lg {
+    .section {
+      padding-top: var(--section-padding-desktop);
+      padding-bottom: var(--section-padding-desktop);
+    }
+  }
+
+  /* Animate on scroll — initial state */
+  .aos {
+    opacity: 0;
+    transform: translateY(var(--entry-translate-y));
+  }
+
+  .aos.in-view {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity var(--duration-slow) var(--ease-out-expo),
+      transform var(--duration-slow) var(--ease-out-expo);
+  }
+
+  /* Heading sizes with optical tracking */
+  .display {
+    font-family: var(--font-heading);
+    font-size: clamp(var(--text-4xl), 8vw, var(--text-5xl));
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tightest);
+    font-weight: 400;
+  }
+
+  .h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(var(--text-3xl), 6vw, var(--text-4xl));
+    line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-tighter);
+    font-weight: 400;
+  }
+
+  .h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(var(--text-2xl), 4vw, var(--text-3xl));
+    line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-tight);
+    font-weight: 400;
+  }
+
+  .h3 {
+    font-family: var(--font-heading);
+    font-size: clamp(var(--text-xl), 3vw, var(--text-2xl));
+    line-height: var(--leading-normal);
+    letter-spacing: var(--tracking-snug);
+    font-weight: 400;
+  }
+
+  .label {
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  /* Gold geometric line divider */
+  .geo-line-svg {
+    display: block;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .geo-line-path {
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+  }
+
+  .geo-line-path.drawn {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset var(--duration-draw) var(--ease-linear);
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .text-pretty  { text-wrap: pretty; }
+
+  /* Heading font utility */
+  .font-heading { font-family: var(--font-heading); }
+
+  /* Prose constraint */
+  .prose-width { max-width: var(--prose-max-width); }
+  .narrow-width { max-width: var(--narrow-max-width); }
+}
+
+/* Page-level grain texture — fixed, sits above all sections, below loader */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23grain)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  background-repeat: repeat;
+}

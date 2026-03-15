@@ -1,0 +1,110 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import ContactForm from '@/components/react/ContactForm.tsx'
+---
+
+<Layout
+  title="Contact"
+  description="Get in touch with Orphan Aid. Questions about sponsorship, volunteering, or donations — our team responds within 2 working days. Located in Surrey, BC."
+  canonical="/contact"
+  keywords={['contact Orphan Aid', 'orphan charity Surrey BC', 'Islamic charity contact Canada', 'orphan sponsorship enquiry', 'charity Surrey British Columbia']}
+>
+  <section class="page-hero" aria-label="Contact Orphan Aid">
+    <div class="container py-48 lg:py-56">
+      <div class="max-w-2xl">
+        <p class="label mb-6">Get in Touch</p>
+        <h1 class="h1 text-ink mb-6">
+          We'd love to<br />
+          <em style="font-style: italic;">hear from you.</em>
+        </h1>
+        <p class="font-body text-lg text-ink-secondary leading-relaxed mt-6" style="max-width: 28rem;">
+          Questions about sponsorship, volunteering, or general enquiries — our team responds within 2 working days.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="container" aria-hidden="true">
+    <svg class="geo-line-svg" viewBox="0 0 1200 2" height="2" preserveAspectRatio="none">
+      <line x1="0" y1="1" x2="1200" y2="1" stroke="#D4A84B" stroke-width="1" class="geo-line-path"/>
+    </svg>
+  </div>
+
+  <section class="section" aria-label="Contact information and form">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+
+        <!-- Contact details -->
+        <div class="lg:col-span-4">
+          <div class="space-y-10">
+
+            <div class="aos">
+              <p class="label mb-3">Email</p>
+              <a
+                href="mailto:info@orphanaid.com"
+                class="font-heading text-ink hover:text-ink-secondary transition-colors duration-fast"
+                style="font-size: 1.25rem; letter-spacing: -0.01em;"
+              >
+                info@orphanaid.com
+              </a>
+            </div>
+
+            <div class="aos" data-delay="0.05">
+              <p class="label mb-3">Phone</p>
+              <a
+                href="tel:+16479779901"
+                class="font-heading text-ink hover:text-ink-secondary transition-colors duration-fast"
+                style="font-size: 1.25rem; letter-spacing: -0.01em;"
+              >
+                +1 (647) 977 9901
+              </a>
+            </div>
+
+            <div class="aos" data-delay="0.1">
+              <p class="label mb-3">Address</p>
+              <address class="not-italic font-body text-base text-ink-secondary leading-relaxed">
+                13750 100th Ave<br />
+                Unit #2010<br />
+                Surrey, BC V3T 0L3<br />
+                Canada
+              </address>
+            </div>
+
+            <div class="aos" data-delay="0.15">
+              <p class="label mb-3">Charity Registration</p>
+              <p class="font-body text-sm text-ink-muted">
+                #891782436 RR 0001
+              </p>
+            </div>
+
+            <!-- Gold divider -->
+            <div class="aos" aria-hidden="true" data-delay="0.2">
+              <svg width="48" height="2" viewBox="0 0 48 2">
+                <line x1="0" y1="1" x2="48" y2="1" stroke="#C4952A" stroke-width="1.5" class="geo-line-path"/>
+              </svg>
+            </div>
+
+            <div class="aos" data-delay="0.25">
+              <p class="font-body text-sm text-ink-secondary leading-relaxed">
+                We aim to respond to all enquiries within 2 working days.
+                For urgent matters regarding an existing sponsorship,
+                please include your reference number in your message.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Contact form -->
+        <div class="lg:col-span-7 lg:col-start-6 aos" data-delay="0.1">
+          <ContactForm type="contact" client:visible />
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero { background-color: var(--color-bg); padding-top: 5rem; }
+</style>

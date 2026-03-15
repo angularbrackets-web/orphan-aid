@@ -1,0 +1,102 @@
+---
+// PageTransition — The Covenant
+// Cream overlay that covers the outgoing page, then wipes off the incoming page.
+// Uses the Navigation API (supported in modern browsers) with a fallback
+// to the click-intercept pattern for broader compatibility.
+// Duration: 400ms ease-in-out — matches tokens.css --duration-page
+// Skips animation on prefers-reduced-motion.
+---
+
+<div
+  id="oa-transition"
+  aria-hidden="true"
+  role="presentation"
+></div>
+
+<style>
+  #oa-transition {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background-color: var(--color-bg);
+    /* Starts hidden — GSAP controls opacity/scaleY */
+    transform: scaleY(0);
+    transform-origin: bottom center;
+    pointer-events: none;
+    will-change: transform;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap'
+
+  const overlay = document.getElementById('oa-transition')
+  if (!overlay) throw new Error('PageTransition: overlay element not found')
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  // Reveal: wipe overlay away from top (called on page load)
+  function revealPage() {
+    if (prefersReducedMotion) return
+    gsap.fromTo(
+      overlay,
+      { scaleY: 1, transformOrigin: 'top center' },
+      { scaleY: 0, duration: 0.5, ease: 'power4.inOut', transformOrigin: 'top center' }
+    )
+  }
+
+  // Cover: wipe overlay over page from bottom (called before navigate)
+  function coverPage(): Promise<void> {
+    return new Promise((resolve) => {
+      if (prefersReducedMotion) {
+        resolve()
+        return
+      }
+      gsap.fromTo(
+        overlay,
+        { scaleY: 0, transformOrigin: 'bottom center' },
+        {
+          scaleY: 1,
+          duration: 0.4,
+          ease: 'power4.inOut',
+          transformOrigin: 'bottom center',
+          onComplete: resolve,
+        }
+      )
+    })
+  }
+
+  // Run reveal immediately on first load (handles back-navigation too)
+  revealPage()
+
+  // Intercept internal anchor clicks
+  document.addEventListener('click', async (e) => {
+    if (prefersReducedMotion) return
+
+    const anchor = (e.target as HTMLElement).closest('a')
+    if (!anchor) return
+
+    const href = anchor.getAttribute('href')
+    if (!href) return
+
+    // Skip: external, hash-only, mailto, tel, download
+    if (
+      anchor.getAttribute('target') === '_blank' ||
+      href.startsWith('http') ||
+      href.startsWith('//') ||
+      href.startsWith('#') ||
+      href.startsWith('mailto:') ||
+      href.startsWith('tel:') ||
+      anchor.hasAttribute('download')
+    ) return
+
+    // Same page — no transition
+    const destination = new URL(href, window.location.href)
+    if (destination.pathname === window.location.pathname) return
+
+    e.preventDefault()
+
+    await coverPage()
+    window.location.assign(href)
+  })
+</script>

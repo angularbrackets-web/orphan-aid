@@ -1,0 +1,233 @@
+/* ============================================================
+   Orphan Aid — Design Tokens
+   Concept: The Covenant
+   Generated: 2026-03-14
+   ============================================================ */
+
+:root {
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY
+     ---------------------------------------------------------- */
+
+  --font-heading: 'Cormorant Variable', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body: 'DM Sans Variable', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Type Scale — Perfect Fourth (1.333) from 18px */
+  --text-xs:   0.75rem;     /* 12px — captions, legal */
+  --text-sm:   0.875rem;    /* 14px — UI labels, nav, metadata */
+  --text-base: 1.125rem;    /* 18px — body copy */
+  --text-lg:   1.5rem;      /* 24px — large body, intro */
+  --text-xl:   2rem;        /* 32px — H3, subsection */
+  --text-2xl:  2.6875rem;   /* 43px — H2, section headings */
+  --text-3xl:  3.5625rem;   /* 57px — H1, page headings */
+  --text-4xl:  4.75rem;     /* 76px — Display, smaller hero */
+  --text-5xl:  6.25rem;     /* 100px — Hero display */
+  --text-6xl:  8rem;        /* 128px — Oversized accent type */
+
+  /* Line Heights */
+  --leading-tight:   1.0;   /* Display / hero (96px+) */
+  --leading-snug:    1.15;  /* Headings (43–76px) */
+  --leading-normal:  1.4;   /* Subheadings (24–32px) */
+  --leading-relaxed: 1.65;  /* Body copy */
+  --leading-loose:   1.8;   /* Captions, small text */
+
+  /* Letter Spacing */
+  --tracking-tightest: -0.04em;  /* Display 100px+ */
+  --tracking-tighter:  -0.03em;  /* Hero 76px */
+  --tracking-tight:    -0.02em;  /* H1/H2 43–57px */
+  --tracking-snug:     -0.01em;  /* H3 24–32px */
+  --tracking-normal:    0em;     /* Body */
+  --tracking-wide:     +0.04em;  /* Button text */
+  --tracking-wider:    +0.06em;  /* Form labels */
+  --tracking-widest:   +0.08em;  /* All-caps UI labels */
+
+  /* Font Weights */
+  --weight-light:       100;  /* Editorial New Ultralight — decorative only */
+  --weight-regular:     400;  /* Editorial New Regular, DM Sans Regular */
+  --weight-medium:      500;  /* DM Sans Medium — labels, nav */
+  --weight-semibold:    600;  /* DM Sans SemiBold — buttons, UI emphasis */
+
+
+  /* ----------------------------------------------------------
+     COLOR — Islamic Manuscript Palette
+     ---------------------------------------------------------- */
+
+  /* Backgrounds — Warm Parchment */
+  --color-bg:             #F8F3EB;  /* Warm parchment — primary surface, 90% of pages */
+  --color-bg-subtle:      #F0E9DA;  /* Deeper parchment — card fills, inputs */
+  --color-surface:        #E8DEC9;  /* Elevated surface — hover states, raised cards */
+  --color-border:         #D4C9B0;  /* Warm stone — dividers, input borders */
+  --color-border-subtle:  #E4DCCA;  /* Pale stone — subtle separators */
+
+  /* Text — Warm Ink */
+  --color-text:           #1C1208;  /* Warm near-black — primary text */
+  --color-text-secondary: #6B5B45;  /* Warm brown — supporting copy, captions */
+  --color-text-muted:     #9A8872;  /* Light brown — placeholders, disabled */
+
+  /* Gold — Islamic Gold Leaf */
+  --color-gold:           #C4952A;  /* Islamic gold — geometric line work, accents */
+  --color-gold-light:     #D4A84B;  /* Pale gold — SVG stroke lines (1px legibility) */
+  --color-gold-muted:     #E8D5A3;  /* Muted gold — watermark patterns at low opacity */
+
+  /* Teal — Deep Trust */
+  --color-teal:           #1B3A4B;  /* Deep teal — CTA button + CTA section bg */
+  --color-teal-hover:     #142D3A;  /* Teal dark — button hover state */
+  --color-teal-text:      #FDFAF5;  /* Warm white — text on teal surfaces */
+
+  /* Semantic */
+  --color-success:        #1A5C3A;  /* Form success */
+  --color-error:          #B91C1C;  /* Form errors */
+
+  /* Overlays */
+  --color-overlay:        rgba(28, 18, 8, 0.55);   /* Photography overlays */
+  --color-overlay-subtle: rgba(28, 18, 8, 0.25);   /* Hover overlays */
+
+
+  /* ----------------------------------------------------------
+     SPACING — 4px Base Grid
+     ---------------------------------------------------------- */
+
+  --space-0:   0px;
+  --space-1:   0.25rem;   /* 4px */
+  --space-2:   0.5rem;    /* 8px */
+  --space-3:   0.75rem;   /* 12px */
+  --space-4:   1rem;      /* 16px */
+  --space-5:   1.25rem;   /* 20px */
+  --space-6:   1.5rem;    /* 24px */
+  --space-8:   2rem;      /* 32px */
+  --space-10:  2.5rem;    /* 40px */
+  --space-12:  3rem;      /* 48px */
+  --space-16:  4rem;      /* 64px */
+  --space-20:  5rem;      /* 80px */
+  --space-24:  6rem;      /* 96px */
+  --space-32:  8rem;      /* 128px */
+  --space-40:  10rem;     /* 160px */
+  --space-48:  12rem;     /* 192px */
+
+  /* Semantic Spacing */
+  --section-padding-desktop: var(--space-40);   /* 160px — premium breathing room */
+  --section-padding-mobile:  var(--space-24);   /* 96px */
+  --container-px-desktop:    5rem;              /* 80px horizontal container padding */
+  --container-px-mobile:     1.5rem;            /* 24px */
+  --content-max-width:       80rem;             /* 1280px */
+  --prose-max-width:         45rem;             /* 720px — body copy columns */
+  --narrow-max-width:        35rem;             /* 560px — pull quotes */
+
+
+  /* ----------------------------------------------------------
+     MOTION — Deliberate & Reverent
+     ---------------------------------------------------------- */
+
+  /* Easing */
+  --ease-out-expo:       cubic-bezier(0.16, 1, 0.3, 1);      /* Primary reveals */
+  --ease-out-quart:      cubic-bezier(0.25, 1, 0.5, 1);      /* UI hover states */
+  --ease-in-out-quart:   cubic-bezier(0.76, 0, 0.24, 1);     /* Page transitions */
+  --ease-linear:         linear;                              /* SVG draws, counters */
+
+  /* Durations */
+  --duration-instant:    100ms;   /* Hover color feedback */
+  --duration-fast:       200ms;   /* Button hover, link underlines */
+  --duration-normal:     350ms;   /* UI state changes */
+  --duration-slow:       500ms;   /* Content fade-up entries */
+  --duration-deliberate: 700ms;   /* Section heroes, photography */
+  --duration-draw:       1200ms;  /* SVG geometric line draw */
+  --duration-count:      2000ms;  /* Impact counter animations */
+  --duration-page:       400ms;   /* Page transition fade */
+
+  /* Stagger Values */
+  --stagger-text:    80ms;   /* Text blocks in a section */
+  --stagger-grid:    60ms;   /* Grid/column items */
+  --stagger-counter: 150ms;  /* Impact number items */
+
+  /* Scroll Entry Translate */
+  --entry-translate-y: 24px;   /* Fade-up starting offset */
+
+
+  /* ----------------------------------------------------------
+     BORDERS & RADII
+     ---------------------------------------------------------- */
+
+  --radius-none:   0px;
+  --radius-sharp:  2px;   /* Default — buttons, inputs, cards */
+  --radius-sm:     4px;   /* Internal component use only */
+
+  /* Border widths */
+  --border-thin:   1px;
+  --border-medium: 1.5px;  /* Geometric SVG line weight */
+
+
+  /* ----------------------------------------------------------
+     Z-INDEX
+     ---------------------------------------------------------- */
+
+  --z-base:    0;
+  --z-raised:  10;
+  --z-overlay: 100;
+  --z-nav:     200;
+  --z-modal:   300;
+}
+
+
+/* ----------------------------------------------------------
+   GLOBAL BASE STYLES
+   ---------------------------------------------------------- */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-snug);
+  text-wrap: balance;
+}
+
+/* Scroll entry animation base state */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(var(--entry-translate-y));
+  transition:
+    opacity var(--duration-slow) var(--ease-out-expo),
+    transform var(--duration-slow) var(--ease-out-expo);
+}
+
+.animate-on-scroll.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .animate-on-scroll {
+    opacity: 1;
+    transform: none;
+  }
+}

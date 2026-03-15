@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.astro/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# npm cache
+.npm-cache/
+
+# Playwright / browser tools
+.playwright-mcp/
+
+# Generated screenshots and review images
+*.png
+
+# Gemini / AI assistant
+.gemini/

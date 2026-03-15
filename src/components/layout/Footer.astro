@@ -1,0 +1,125 @@
+---
+const currentYear = new Date().getFullYear()
+---
+
+<!-- Final geometric line -->
+<div class="container" aria-hidden="true">
+  <svg class="geo-line-svg" viewBox="0 0 1200 2" height="2" preserveAspectRatio="none">
+    <line x1="0" y1="1" x2="1200" y2="1" stroke="#D4A84B" stroke-width="1" class="geo-line-path"/>
+  </svg>
+</div>
+
+<footer class="bg-bg pt-20 pb-12" role="contentinfo">
+  <div class="container">
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0 mb-16">
+
+      <!-- Brand column -->
+      <div class="lg:col-span-4">
+        <a href="/" class="group flex items-center gap-3 mb-6 no-underline" aria-label="Orphan Aid — Home">
+          <svg width="24" height="24" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <path
+              d="M14 2L16.1 9.9L22.6 5.4L18.1 11.9L26 14L18.1 16.1L22.6 22.6L16.1 18.1L14 26L11.9 18.1L5.4 22.6L9.9 16.1L2 14L9.9 11.9L5.4 5.4L11.9 9.9Z"
+              stroke="#C4952A" stroke-width="1" fill="none"
+            />
+          </svg>
+          <span class="font-heading text-ink" style="font-size: 1.125rem; letter-spacing: -0.01em;">
+            Orphan Aid
+          </span>
+        </a>
+
+        <p class="font-body text-sm text-ink-secondary mb-6 leading-relaxed" style="max-width: 22rem;">
+          A registered Canadian charity providing care, education,
+          and monthly support for orphaned children worldwide.
+        </p>
+
+        <p class="label">Charity Registration</p>
+        <p class="font-body text-sm text-ink-muted mt-1">#891782436 RR 0001</p>
+      </div>
+
+      <!-- Navigation columns -->
+      <div class="lg:col-span-2 lg:col-start-6">
+        <p class="label mb-5">Organisation</p>
+        <nav aria-label="Footer organisation links">
+          <ul class="space-y-1 list-none">
+            {[
+              { href: '/about',     label: 'About Us' },
+              { href: '/volunteer', label: 'Volunteer' },
+              { href: '/contact',   label: 'Contact' },
+            ].map((link) => (
+              <li class="py-1.5">
+                <a href={link.href} class="footer-link">{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
+      <div class="lg:col-span-2 lg:col-start-8">
+        <p class="label mb-5">Get Involved</p>
+        <nav aria-label="Footer get involved links">
+          <ul class="space-y-1 list-none">
+            {[
+              { href: '/sponsor', label: 'Sponsor an Orphan' },
+              { href: '/donate',  label: 'Donate' },
+              { href: '/volunteer', label: 'Volunteer' },
+            ].map((link) => (
+              <li class="py-1.5">
+                <a href={link.href} class="footer-link">{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Contact column -->
+      <div class="lg:col-span-3 lg:col-start-10">
+        <p class="label mb-5">Contact</p>
+        <address class="not-italic space-y-3">
+          <p>
+            <a href="mailto:info@orphanaid.com" class="footer-link font-body text-sm text-ink-secondary">
+              info@orphanaid.com
+            </a>
+          </p>
+          <p>
+            <a href="tel:+16479779901" class="footer-link font-body text-sm text-ink-secondary">
+              +1 (647) 977 9901
+            </a>
+          </p>
+          <p class="font-body text-sm text-ink-muted leading-relaxed">
+            13750 100th Ave Unit #2010<br />
+            Surrey, BC, V3T 0L3<br />
+            Canada
+          </p>
+        </address>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="pt-8 border-t border-border-subtle flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <p class="font-body text-xs text-ink-muted">
+        &copy; {currentYear} Orphan Aid. All rights reserved.
+      </p>
+      <div class="flex gap-6">
+        <a href="/privacy" class="font-body text-xs text-ink-muted hover:text-ink-secondary transition-colors duration-fast">Privacy Policy</a>
+        <a href="/terms" class="font-body text-xs text-ink-muted hover:text-ink-secondary transition-colors duration-fast">Terms of Use</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<style>
+  .footer-link {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-out-quart);
+  }
+
+  .footer-link:hover {
+    color: var(--color-text);
+  }
+</style>

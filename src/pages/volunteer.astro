@@ -1,0 +1,99 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import ContactForm from '@/components/react/ContactForm.tsx'
+import CovenantCTA from '@/components/sections/CovenantCTA.astro'
+---
+
+<Layout
+  title="Volunteer"
+  description="Join the Orphan Aid team and make a direct impact. Volunteer opportunities in fundraising, community outreach, and programme support."
+  canonical="/volunteer"
+  keywords={['volunteer Islamic charity Canada', 'charity volunteer Surrey BC', 'orphan aid volunteer', 'humanitarian volunteer Canada']}
+>
+  <section class="page-hero" aria-label="Volunteer with Orphan Aid">
+    <div class="container py-48 lg:py-56">
+      <div class="max-w-3xl">
+        <p class="label mb-6">Get Involved</p>
+        <h1 class="h1 text-ink mb-6">
+          Join our team and make<br />
+          <em style="font-style: italic;">a direct impact.</em>
+        </h1>
+        <div class="w-16 my-8" aria-hidden="true">
+          <svg width="64" height="2" viewBox="0 0 64 2">
+            <line x1="0" y1="1" x2="64" y2="1" stroke="#C4952A" stroke-width="1.5" class="geo-line-path"/>
+          </svg>
+        </div>
+        <p class="font-body text-lg text-ink-secondary leading-relaxed" style="max-width: 32rem;">
+          Volunteering with Orphan Aid means more than giving time —
+          it means becoming part of the covenant we keep with children worldwide.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="container" aria-hidden="true">
+    <svg class="geo-line-svg" viewBox="0 0 1200 2" height="2" preserveAspectRatio="none">
+      <line x1="0" y1="1" x2="1200" y2="1" stroke="#D4A84B" stroke-width="1" class="geo-line-path"/>
+    </svg>
+  </div>
+
+  <!-- Opportunities -->
+  <section class="section" aria-label="Volunteer opportunities">
+    <div class="container">
+      <div class="aos mb-16">
+        <p class="label mb-4">How you can help</p>
+        <h2 class="h2 text-ink">Volunteer opportunities.</h2>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-10">
+        {[
+          {
+            title: 'Community Outreach',
+            body: 'Help us reach more families in Muslim and humanitarian communities across Canada through events, mosques, and community centres.',
+          },
+          {
+            title: 'Fundraising & Events',
+            body: 'Organise and support fundraising events — Ramadan campaigns, charity dinners, and community drives — to grow our sponsorship base.',
+          },
+          {
+            title: 'Communications & Design',
+            body: 'Help us tell the stories of the children we support through writing, photography, social media, and graphic design.',
+          },
+          {
+            title: 'Administration & Compliance',
+            body: 'Support our operations team with reporting, donor communications, and the administrative work that keeps our charity running effectively.',
+          },
+        ].map((opp, i) => (
+          <div class="aos border-t border-border pt-8" data-delay={String(i * 0.08)}>
+            <h3 class="h3 text-ink mb-3">{opp.title}</h3>
+            <p class="font-body text-base text-ink-secondary leading-relaxed">{opp.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Volunteer form -->
+  <section class="section bg-bg-subtle" aria-label="Volunteer application">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div class="lg:col-span-4 aos">
+          <p class="label mb-4">Apply to volunteer</p>
+          <h2 class="h2 text-ink mb-6">Tell us about yourself.</h2>
+          <p class="font-body text-base text-ink-secondary leading-relaxed">
+            Fill in the form and our team will be in touch within 3 working days
+            to discuss how you can get involved.
+          </p>
+        </div>
+        <div class="lg:col-span-7 lg:col-start-6 aos" data-delay="0.1">
+          <ContactForm type="volunteer" client:visible />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CovenantCTA />
+</Layout>
+
+<style>
+  .page-hero { background-color: var(--color-bg); padding-top: 5rem; }
+</style>

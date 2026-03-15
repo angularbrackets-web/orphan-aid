@@ -1,0 +1,116 @@
+---
+const stats = [
+  { value: 847, suffix: '+', label: 'Children Sponsored', sublabel: 'across 14 countries' },
+  { value: 12,  suffix: '',  label: 'Years of Service',   sublabel: 'since our founding' },
+  { value: 100, suffix: '%', label: 'Sponsorships Reach',  sublabel: 'the child directly' },
+]
+---
+
+<section class="impact-section section relative overflow-hidden" aria-label="Our impact">
+  <!-- Warm radial glow — gold at low opacity for depth -->
+  <div
+    class="absolute inset-0 pointer-events-none"
+    style="background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(196,149,42,0.07) 0%, transparent 65%);"
+    aria-hidden="true"
+  ></div>
+
+  <div class="container relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-0">
+      {stats.map((stat, i) => (
+        <div
+          class={`aos text-center lg:px-16 first:pl-0 last:pr-0 ${i > 0 ? 'impact-stat-divider' : ''}`}
+          data-delay={String(i * 0.15)}
+        >
+          <!-- Gold accent line -->
+          <div class="flex justify-center mb-8" aria-hidden="true">
+            <svg width="40" height="2" viewBox="0 0 40 2">
+              <line x1="0" y1="1" x2="40" y2="1" stroke="#C4952A" stroke-width="1.5" class="geo-line-path"/>
+            </svg>
+          </div>
+
+          <!-- Counter — large, gold -->
+          <div
+            class="font-heading mb-3"
+            style="font-size: clamp(4.5rem, 9vw, 7rem); line-height: 0.9; letter-spacing: -0.04em; color: #C4952A;"
+            aria-label={`${stat.value}${stat.suffix}`}
+          >
+            <span
+              class="counter"
+              data-target={stat.value}
+              data-suffix={stat.suffix}
+            >
+              {stat.value}{stat.suffix}
+            </span>
+          </div>
+
+          <!-- Label -->
+          <p class="impact-label label mb-1">{stat.label}</p>
+          <p class="impact-sublabel font-body text-sm">{stat.sublabel}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .impact-section {
+    background-color: #1C1208;
+  }
+
+  .impact-label {
+    color: rgba(253, 250, 245, 0.6) !important;
+  }
+
+  .impact-sublabel {
+    color: rgba(253, 250, 245, 0.38);
+  }
+
+  .impact-stat-divider {
+    border-top: 1px solid rgba(196, 149, 42, 0.15);
+  }
+
+  @media (min-width: 1024px) {
+    .impact-stat-divider {
+      border-top: none;
+      border-left: 1px solid rgba(196, 149, 42, 0.15);
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  document.querySelectorAll('.counter').forEach((counter) => {
+    const target = parseInt((counter as HTMLElement).dataset.target || '0', 10)
+    const suffix = (counter as HTMLElement).dataset.suffix || ''
+
+    if (prefersReducedMotion) {
+      counter.textContent = `${target}${suffix}`
+      return
+    }
+
+    ScrollTrigger.create({
+      trigger: counter,
+      start: 'top 85%',
+      once: true,
+      onEnter: () => {
+        counter.textContent = `0${suffix}`
+        const obj = { val: 0 }
+        gsap.to(obj, {
+          val: target,
+          duration: 2.2,
+          ease: 'power3.out',
+          onUpdate: () => {
+            counter.textContent = `${Math.round(obj.val)}${suffix}`
+          },
+          onComplete: () => {
+            counter.textContent = `${target}${suffix}`
+          },
+        })
+      },
+    })
+  })
+</script>

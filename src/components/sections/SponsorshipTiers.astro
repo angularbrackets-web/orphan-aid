@@ -1,0 +1,217 @@
+---
+const tiers = [
+  {
+    name: 'Essential Care',
+    amount: 35,
+    period: 'per month',
+    description: 'Provides daily meals, clothing, and safe shelter for one child — the foundation of every dignified life.',
+    covers: ['Nutritious daily meals', 'Clothing & basic needs', 'Safe shelter & hygiene'],
+  },
+  {
+    name: 'Full Sponsorship',
+    amount: 65,
+    period: 'per month',
+    description: 'The complete covenant — covering education, healthcare, daily care, and psychosocial support. This is what transforms a life.',
+    covers: ['Everything in Essential Care', 'School fees & supplies', 'Medical care & check-ups', 'Psychosocial support'],
+    featured: true,
+  },
+  {
+    name: 'Education Focus',
+    amount: 45,
+    period: 'per month',
+    description: 'Dedicated to a child\'s educational journey — from school fees to tutoring, we keep the door to learning open.',
+    covers: ['School fees & uniforms', 'Learning materials', 'Tutoring & mentorship'],
+  },
+]
+---
+
+<section class="tiers-section section relative overflow-hidden" aria-label="Sponsorship options">
+  <!-- Background documentary photo — heavy teal overlay -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <img
+      src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=1600&q=80&auto=format&fit=crop"
+      alt=""
+      class="tiers-bg-img absolute inset-0 w-full h-full object-cover"
+      loading="lazy"
+      decoding="async"
+    />
+    <div
+      class="absolute inset-0"
+      style="background-color: rgba(27, 58, 75, 0.91);"
+    ></div>
+  </div>
+
+  <div class="container relative z-10">
+
+    <div class="aos mb-16" data-reveal="wipe">
+      <p class="label mb-4" style="color: rgba(253,250,245,0.65);">Monthly commitment</p>
+      <h2 class="h2 max-w-lg" style="color: var(--color-teal-text);">
+        Choose how you'll<br />keep your promise.
+      </h2>
+    </div>
+
+    <!-- Tier grid — consistent inner padding, no flush edges -->
+    <div class="tiers-grid">
+
+      {tiers.map((tier, i) => (
+        <div
+          class={`tier-card aos ${tier.featured ? 'tier-featured' : ''}`}
+          data-delay={String(i * 0.12)}
+        >
+          <!-- Gold accent line -->
+          <div class="mb-8" aria-hidden="true">
+            <svg width="32" height="2" viewBox="0 0 32 2">
+              <line x1="0" y1="1" x2="32" y2="1" stroke="#C4952A" stroke-width="1.5" class="geo-line-path"/>
+            </svg>
+          </div>
+
+          <p class="label mb-3">{tier.name}</p>
+
+          <div class="mb-6 flex items-baseline gap-1">
+            <span
+              class="font-heading text-ink"
+              style="font-size: clamp(2.5rem, 5vw, 3.5rem); letter-spacing: -0.03em; line-height: 1;"
+              aria-label={`$${tier.amount} Canadian dollars`}
+            >
+              ${tier.amount}
+            </span>
+            <span class="font-body text-sm text-ink-muted">CAD / {tier.period}</span>
+          </div>
+
+          <p class="font-body text-base text-ink-secondary mb-8 leading-relaxed">
+            {tier.description}
+          </p>
+
+          <ul class="space-y-2 mb-10" aria-label={`What ${tier.name} covers`}>
+            {tier.covers.map((item) => (
+              <li class="flex items-start gap-3 font-body text-sm text-ink-secondary">
+                <span class="mt-1.5 flex-shrink-0 w-3 h-px bg-gold" aria-hidden="true"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href="/sponsor"
+            class={tier.featured ? 'tier-btn-primary' : 'tier-btn-ghost'}
+            aria-label={`Sponsor with ${tier.name} — $${tier.amount} per month`}
+          >
+            {tier.featured ? 'Sponsor an Orphan' : 'Choose this plan'}
+          </a>
+        </div>
+      ))}
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* Grid — equal columns, gap separates cards cleanly */
+  .tiers-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  @media (min-width: 1024px) {
+    .tiers-grid {
+      grid-template-columns: 1fr 1.2fr 0.8fr;
+      gap: 0;
+    }
+  }
+
+  /* All cards — consistent padding, parchment background */
+  .tier-card {
+    background-color: var(--color-bg);
+    padding: 2.5rem 2rem;
+    transition:
+      transform var(--duration-normal) var(--ease-out-quart),
+      background-color var(--duration-normal) var(--ease-out-quart);
+  }
+
+  @media (min-width: 1024px) {
+    .tier-card {
+      padding: 3rem 2.5rem;
+    }
+  }
+
+  .tier-card:hover {
+    transform: translateY(-4px);
+    background-color: var(--color-bg-subtle);
+  }
+
+  /* Featured card — slightly elevated */
+  .tier-featured {
+    background-color: var(--color-bg-subtle);
+    border-left: 1px solid rgba(196,149,42,0.2);
+    border-right: 1px solid rgba(196,149,42,0.2);
+  }
+
+  @media (min-width: 1024px) {
+    .tier-featured {
+      padding: 3.5rem 2.5rem;
+    }
+  }
+
+  .tier-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.875rem 1.75rem;
+    background-color: var(--color-teal);
+    color: var(--color-teal-text);
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background-color var(--duration-fast) var(--ease-out-quart);
+  }
+
+  .tier-btn-primary:hover {
+    background-color: var(--color-teal-hover);
+  }
+
+  .tier-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    padding: calc(0.875rem - 1px) calc(1.75rem - 1px);
+    background-color: transparent;
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    border: 1px solid var(--color-border);
+    transition: border-color var(--duration-fast) var(--ease-out-quart);
+  }
+
+  .tier-btn-ghost:hover {
+    border-color: var(--color-text);
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  if (!prefersReducedMotion) {
+    gsap.to('.tiers-bg-img', {
+      yPercent: -8,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.tiers-section',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true,
+      },
+    })
+  }
+</script>

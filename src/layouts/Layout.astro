@@ -1,0 +1,226 @@
+---
+import Navigation from '@/components/layout/Navigation.astro'
+import Footer from '@/components/layout/Footer.astro'
+import Loader from '@/components/ui/Loader.astro'
+import PageTransition from '@/components/ui/PageTransition.astro'
+import '@/styles/globals.css'
+
+interface Props {
+  title: string
+  description?: string
+  ogImage?: string
+  keywords?: string[]
+  canonical?: string
+}
+
+const {
+  title,
+  description = 'Orphan Aid is a registered Canadian charity providing care, education, and monthly sponsorship support for orphaned children worldwide.',
+  ogImage = '/og-image.png',
+  keywords = ['orphan sponsorship Canada', 'Islamic charity Canada', 'sponsor an orphan', 'Canadian charity orphans', 'sadaqah jariyah', 'orphan care', 'Muslim charity Canada'],
+  canonical,
+} = Astro.props
+
+const siteUrl = 'https://orphanaid.com'
+const fullTitle = title === 'Home' ? 'Orphan Aid — Caring for Orphans Worldwide' : `${title} | Orphan Aid`
+const canonicalUrl = canonical ? `${siteUrl}${canonical}` : Astro.url.href
+const ogImageAbsolute = `${siteUrl}${ogImage}`
+
+// JSON-LD structured data — NonprofitOrganization (root)
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': ['Organization', 'NGO'],
+  name: 'Orphan Aid',
+  url: siteUrl,
+  logo: `${siteUrl}/favicon.svg`,
+  description: 'A registered Canadian charity providing care, education, and monthly sponsorship support for orphaned children worldwide.',
+  foundingLocation: {
+    '@type': 'Place',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Surrey',
+      addressRegion: 'BC',
+      addressCountry: 'CA',
+    },
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+1-647-977-9901',
+    email: 'info@orphanaid.com',
+    contactType: 'customer service',
+    areaServed: 'CA',
+    availableLanguage: 'English',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '13750 100th Ave Unit #2010',
+    addressLocality: 'Surrey',
+    addressRegion: 'BC',
+    postalCode: 'V3T 0L3',
+    addressCountry: 'CA',
+  },
+  sameAs: [],
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords.join(', ')} />
+    <meta name="author" content="Orphan Aid" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageAbsolute} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Orphan Aid — Caring for Orphans Worldwide" />
+    <meta property="og:site_name" content="Orphan Aid" />
+    <meta property="og:locale" content="en_CA" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageAbsolute} />
+
+    <title>{fullTitle}</title>
+
+    <!-- Favicon placeholder -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+
+  <body>
+    <!-- Loader — renders first, exits before content is visible -->
+    <Loader />
+
+    <!-- Page transition overlay — covers between routes -->
+    <PageTransition />
+
+    <!-- Skip to content -->
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:text-sm focus:font-body focus:bg-teal-DEFAULT focus:text-teal-text focus:rounded-sharp"
+    >
+      Skip to content
+    </a>
+
+    <Navigation />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <!-- Lenis + GSAP global init -->
+    <script>
+      import Lenis from 'lenis'
+      import { gsap } from 'gsap'
+      import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+      gsap.registerPlugin(ScrollTrigger)
+
+      // Smooth scroll
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+      })
+
+      lenis.on('scroll', () => ScrollTrigger.update())
+
+      gsap.ticker.add((time: number) => {
+        lenis.raf(time * 1000)
+      })
+      gsap.ticker.lagSmoothing(0)
+
+      // Global scroll-reveal (AOS substitute, GSAP-powered)
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+      if (!prefersReducedMotion) {
+        const observeElements = () => {
+          const elements = document.querySelectorAll('.aos')
+          elements.forEach((el) => {
+            const delay = parseFloat((el as HTMLElement).dataset.delay || '0')
+            const reveal = (el as HTMLElement).dataset.reveal
+
+            if (reveal === 'wipe') {
+              gsap.fromTo(el,
+                { clipPath: 'inset(0 100% 0 0)', opacity: 1 },
+                {
+                  clipPath: 'inset(0 0% 0 0)',
+                  duration: 0.95,
+                  delay,
+                  ease: 'power4.out',
+                  scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+                }
+              )
+            } else {
+              gsap.fromTo(
+                el,
+                { opacity: 0, y: 24 },
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.7,
+                  delay,
+                  ease: 'power3.out',
+                  scrollTrigger: {
+                    trigger: el,
+                    start: 'top 88%',
+                    once: true,
+                  },
+                }
+              )
+            }
+          })
+        }
+        observeElements()
+      } else {
+        // Immediately show all elements
+        document.querySelectorAll('.aos').forEach((el) => {
+          el.classList.add('in-view')
+        })
+      }
+
+      // Geometric line draws
+      if (!prefersReducedMotion) {
+        document.querySelectorAll('.geo-line-path').forEach((path) => {
+          const length = (path as SVGPathElement).getTotalLength?.() || 1200
+          gsap.set(path, { strokeDasharray: length, strokeDashoffset: length })
+          gsap.to(path, {
+            strokeDashoffset: 0,
+            duration: 1.2,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: path,
+              start: 'top 90%',
+              once: true,
+            },
+          })
+        })
+      } else {
+        document.querySelectorAll('.geo-line-path').forEach((path) => {
+          gsap.set(path, { strokeDashoffset: 0 })
+        })
+      }
+    </script>
+  </body>
+</html>

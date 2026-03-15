@@ -1,0 +1,205 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import CovenantCTA from '@/components/sections/CovenantCTA.astro'
+
+const tiers = [
+  {
+    name: 'Essential Care',
+    amount: 35,
+    description: 'Provides daily meals, clothing, and safe shelter for one child.',
+    covers: ['Nutritious daily meals', 'Clothing & basic needs', 'Safe shelter & hygiene'],
+  },
+  {
+    name: 'Full Sponsorship',
+    amount: 65,
+    description: 'The complete covenant — education, healthcare, daily care, and psychosocial support.',
+    covers: ['Everything in Essential Care', 'School fees & supplies', 'Medical care & check-ups', 'Psychosocial support'],
+    featured: true,
+  },
+  {
+    name: 'Education Focus',
+    amount: 45,
+    description: 'Dedicated to a child\'s educational journey from school fees to tutoring.',
+    covers: ['School fees & uniforms', 'Learning materials', 'Tutoring & mentorship'],
+  },
+]
+---
+
+<Layout
+  title="Sponsor an Orphan"
+  description="Change a child's life with monthly sponsorship. Your covenant of care provides education, healthcare, and daily support for orphaned children worldwide."
+  canonical="/sponsor"
+  keywords={['sponsor an orphan Canada', 'monthly orphan sponsorship', 'orphan sponsorship program', 'Islamic charity sponsorship', 'child sponsorship Canada', 'sadaqah jariyah sponsorship']}
+>
+  <!-- Page hero -->
+  <section class="page-hero" aria-label="Sponsor an Orphan">
+    <div class="container py-48 lg:py-56">
+      <div class="max-w-3xl">
+        <p class="label mb-6">Monthly Sponsorship</p>
+        <h1 class="h1 text-ink mb-6">
+          Change a child's life<br />
+          with a monthly<br />
+          <em style="font-style: italic;">covenant.</em>
+        </h1>
+        <div class="w-16 my-8" aria-hidden="true">
+          <svg width="64" height="2" viewBox="0 0 64 2">
+            <line x1="0" y1="1" x2="64" y2="1" stroke="#C4952A" stroke-width="1.5" class="geo-line-path"/>
+          </svg>
+        </div>
+        <p class="font-body text-lg text-ink-secondary leading-relaxed" style="max-width: 32rem;">
+          Orphan sponsorship is among the most rewarding acts in Islam —
+          a sadaqah jariyah that continues to give long after the moment of giving.
+          It begins with a single decision.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="container" aria-hidden="true">
+    <svg class="geo-line-svg" viewBox="0 0 1200 2" height="2" preserveAspectRatio="none">
+      <line x1="0" y1="1" x2="1200" y2="1" stroke="#D4A84B" stroke-width="1" class="geo-line-path"/>
+    </svg>
+  </div>
+
+  <!-- How it works -->
+  <section class="section" aria-label="How sponsorship works">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div class="lg:col-span-4 aos">
+          <p class="label mb-4">How it works</p>
+          <h2 class="h2 text-ink">Three steps to<br />begin your covenant.</h2>
+        </div>
+        <div class="lg:col-span-7 lg:col-start-6 space-y-12">
+          {[
+            { n: '01', title: 'Choose your sponsorship', body: 'Select the tier that fits your capacity. Every level makes a meaningful difference in a child\'s life.' },
+            { n: '02', title: 'Make your commitment', body: 'Set up a monthly contribution. Orphan Aid handles the rest — funds are distributed directly to your sponsored child\'s care program.' },
+            { n: '03', title: 'Receive updates', body: 'You\'ll receive regular updates on your child\'s progress — their education, health, and growth — so you can see the covenant in action.' },
+          ].map((step, i) => (
+            <div class="aos flex gap-8" data-delay={String(i * 0.1)}>
+              <span
+                class="font-heading text-ink-muted flex-shrink-0"
+                style="font-size: 1rem; letter-spacing: 0.04em; margin-top: 0.2rem;"
+                aria-hidden="true"
+              >
+                {step.n}
+              </span>
+              <div>
+                <h3 class="h3 text-ink mb-3">{step.title}</h3>
+                <p class="font-body text-base text-ink-secondary leading-relaxed">{step.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tiers -->
+  <section class="section bg-bg-subtle" aria-label="Sponsorship tiers">
+    <div class="container">
+      <div class="aos mb-16">
+        <p class="label mb-4">Your options</p>
+        <h2 class="h2 text-ink">Choose your level<br />of commitment.</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {tiers.map((tier, i) => (
+          <div
+            class={`aos p-8 border border-border ${tier.featured ? 'bg-bg border-gold' : 'bg-bg'}`}
+            data-delay={String(i * 0.12)}
+          >
+            {tier.featured && (
+              <p class="label mb-4" style="color: var(--color-gold);">Most Complete</p>
+            )}
+            <div class="mb-6" aria-hidden="true">
+              <svg width="32" height="2" viewBox="0 0 32 2">
+                <line x1="0" y1="1" x2="32" y2="1" stroke="#C4952A" stroke-width="1.5" class="geo-line-path"/>
+              </svg>
+            </div>
+            <p class="label mb-3" style={tier.featured ? '' : 'color: var(--color-ink-secondary);'}>{tier.name}</p>
+            <div class="flex items-baseline gap-1 mb-4">
+              <span class="font-heading text-ink" style="font-size: 2.5rem; letter-spacing: -0.03em; line-height: 1;">
+                ${tier.amount}
+              </span>
+              <span class="font-body text-sm text-ink-muted">CAD / mo</span>
+            </div>
+            <p class="font-body text-sm text-ink-secondary mb-6 leading-relaxed">{tier.description}</p>
+            <ul class="space-y-2 mb-8">
+              {tier.covers.map((item) => (
+                <li class="flex items-start gap-3 font-body text-sm text-ink-secondary">
+                  <span class="mt-2 flex-shrink-0 w-3 h-px bg-gold" aria-hidden="true"></span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <a
+              href="#sponsor-form"
+              class={tier.featured ? 'tier-btn-primary' : 'tier-btn-ghost'}
+              aria-label={`Select ${tier.name} — $${tier.amount} per month`}
+            >
+              Select this plan
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Placeholder sponsorship form anchor -->
+  <section id="sponsor-form" class="section" aria-label="Start your sponsorship">
+    <div class="container">
+      <div class="max-w-xl mx-auto text-center aos">
+        <p class="label mb-4">Ready to begin?</p>
+        <h2 class="h2 text-ink mb-6">Start your sponsorship.</h2>
+        <p class="font-body text-base text-ink-secondary mb-10 leading-relaxed">
+          Our team will reach out within 48 hours to complete your monthly commitment
+          and connect you with a child whose life your sponsorship will change.
+        </p>
+        <a href="/contact" class="btn-teal">Begin Your Monthly Commitment</a>
+      </div>
+    </div>
+  </section>
+
+  <CovenantCTA />
+</Layout>
+
+<style>
+  .page-hero {
+    background-color: var(--color-bg);
+    padding-top: 5rem; /* account for fixed nav */
+  }
+
+  .tier-btn-primary {
+    display: inline-flex; align-items: center;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--color-teal); color: var(--color-teal-text);
+    font-family: var(--font-body); font-size: var(--text-xs); font-weight: 600;
+    letter-spacing: var(--tracking-widest); text-transform: uppercase;
+    text-decoration: none; border-radius: 2px;
+    transition: background-color var(--duration-fast) var(--ease-out-quart);
+  }
+  .tier-btn-primary:hover { background-color: var(--color-teal-hover); }
+
+  .tier-btn-ghost {
+    display: inline-flex; align-items: center;
+    padding: calc(0.75rem - 1px) calc(1.5rem - 1px);
+    background-color: transparent; color: var(--color-text);
+    font-family: var(--font-body); font-size: var(--text-xs); font-weight: 600;
+    letter-spacing: var(--tracking-widest); text-transform: uppercase;
+    text-decoration: none; border-radius: 2px; border: 1px solid var(--color-border);
+    transition: border-color var(--duration-fast) var(--ease-out-quart);
+  }
+  .tier-btn-ghost:hover { border-color: var(--color-text); }
+
+  .btn-teal {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 1rem 2rem;
+    background-color: var(--color-teal); color: var(--color-teal-text);
+    font-family: var(--font-body); font-size: var(--text-xs); font-weight: 600;
+    letter-spacing: var(--tracking-widest); text-transform: uppercase;
+    text-decoration: none; border-radius: 2px;
+    transition: background-color var(--duration-fast) var(--ease-out-quart);
+  }
+  .btn-teal:hover { background-color: var(--color-teal-hover); }
+</style>

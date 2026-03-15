@@ -1,0 +1,109 @@
+---
+// First photography moment — withheld until here. Full-bleed, earned.
+---
+
+<!-- Geometric divider before the reveal -->
+<div class="container mb-0" aria-hidden="true">
+  <svg class="geo-line-svg" viewBox="0 0 1200 2" height="2" preserveAspectRatio="none">
+    <line x1="0" y1="1" x2="1200" y2="1" stroke="#D4A84B" stroke-width="1" class="geo-line-path"/>
+  </svg>
+</div>
+
+<section
+  class="photo-moment relative overflow-hidden"
+  aria-label="A child's world"
+>
+  <!-- Full-bleed image container -->
+  <div class="photo-reveal relative w-full" style="height: clamp(400px, 60vh, 680px);">
+    <img
+      src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1600&q=80&auto=format&fit=crop"
+      alt="A group of joyful children smiling and laughing together, full of life and hope."
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="lazy"
+      decoding="async"
+    />
+
+    <!-- Warm overlay — subtle, not obscuring -->
+    <div
+      class="absolute inset-0"
+      style="background: linear-gradient(to right, rgba(28,18,8,0.45) 0%, rgba(28,18,8,0) 60%);"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Caption — bottom left -->
+    <div class="absolute bottom-8 left-0 right-0">
+      <div class="container">
+        <div class="max-w-xs">
+          <p class="font-body text-sm text-teal-text mb-1" style="letter-spacing: 0.04em; text-transform: uppercase; font-weight: 500; font-size: 0.7rem; opacity: 0.8;">
+            Sponsored child
+          </p>
+          <p class="font-heading text-teal-text" style="font-size: 1.5rem; letter-spacing: -0.01em; line-height: 1.2;">
+            Amira, 9<br />
+            <span class="font-body" style="font-family: var(--font-body); font-size: 0.875rem; font-weight: 400; opacity: 0.85; letter-spacing: 0;">
+              Syria &mdash; Sponsored since 2022
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- Geometric divider after -->
+<div class="container mt-0" aria-hidden="true">
+  <svg class="geo-line-svg" viewBox="0 0 1200 2" height="2" preserveAspectRatio="none">
+    <line x1="0" y1="1" x2="1200" y2="1" stroke="#D4A84B" stroke-width="1" class="geo-line-path"/>
+  </svg>
+</div>
+
+<style>
+  .photo-reveal {
+    opacity: 0;
+    transform: scale(1.03);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .photo-reveal.revealed {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .photo-reveal {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  const photo = document.querySelector('.photo-reveal')
+  if (photo) {
+    ScrollTrigger.create({
+      trigger: photo,
+      start: 'top 80%',
+      once: true,
+      onEnter: () => photo.classList.add('revealed'),
+    })
+  }
+
+  if (!prefersReducedMotion) {
+    gsap.to('.photo-moment img', {
+      yPercent: -12,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.photo-moment',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true,
+      },
+    })
+  }
+</script>

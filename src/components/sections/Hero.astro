@@ -1,0 +1,402 @@
+---
+// Typographic hero — split layout: editorial text left, documentary image right.
+// The Covenant concept: precision and warmth in equal measure.
+---
+
+<section
+  class="hero relative flex flex-col lg:flex-row"
+  aria-label="Hero"
+>
+  <!-- LEFT PANEL — parchment, text, all existing content -->
+  <div class="hero-left relative flex flex-col justify-center">
+    <!-- Radial warmth gradient — subtle center glow of gold -->
+    <div class="hero-glow absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+
+    <!-- Subtle geometric watermark pattern -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+      <svg
+        class="absolute top-0 left-0 w-full h-full opacity-[0.06]"
+        style="animation: hero-ornament-rotate 60s linear infinite;"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <pattern id="geo-pattern" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+            <!-- 8-pointed geometric star tile -->
+            <path
+              d="M40 8L44.2 24.8L58 16L49.2 30L66 34L49.2 38L58 52L44.2 43.2L40 60L35.8 43.2L22 52L30.8 38L14 34L30.8 30L22 16L35.8 24.8Z"
+              stroke="#C4952A"
+              stroke-width="0.5"
+              fill="none"
+            />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#geo-pattern)" />
+      </svg>
+    </div>
+
+    <div class="container relative z-10 py-28 sm:py-36 lg:py-64">
+      <!-- Label with flanking gold dashes -->
+      <p class="label mb-8 hero-label flex items-center gap-3">
+        <span class="hero-label-dash" aria-hidden="true"></span>
+        Registered Canadian Charity
+        <span class="hero-label-dash" aria-hidden="true"></span>
+      </p>
+
+      <!-- Primary headline — type as architecture -->
+      <h1 class="display text-ink mb-8 max-w-4xl" style="overflow: visible;">
+        <span class="hero-line-wrap" style="display:block; overflow:hidden; line-height:inherit;">
+          <span class="hero-line" style="display:block;">Caring for Orphans</span>
+        </span>
+        <span class="hero-line-wrap" style="display:block; overflow:hidden; line-height:inherit;">
+          <em class="hero-line" style="display:block; font-style:italic;">Worldwide.</em>
+        </span>
+      </h1>
+
+      <!-- Gold geometric line — the signature divider -->
+      <div class="hero-geo-line my-10" style="max-width: 480px;" aria-hidden="true">
+        <svg
+          class="geo-line-svg"
+          viewBox="0 -9 480 20"
+          height="20"
+          width="100%"
+          preserveAspectRatio="none"
+          style="overflow: visible;"
+        >
+          <!-- Left line -->
+          <line
+            x1="0" y1="1" x2="185" y2="1"
+            stroke="#D4A84B" stroke-width="1"
+            class="geo-line-path geo-line-left"
+          />
+          <!-- Right line -->
+          <line
+            x1="295" y1="1" x2="480" y2="1"
+            stroke="#D4A84B" stroke-width="1"
+            class="geo-line-path geo-line-right"
+          />
+          <!-- Central geometric ornament -->
+          <g transform="translate(240, 1)">
+            <!-- Outer 8-point star -->
+            <path
+              d="M0,-9 L2.5,-2.5 L9,0 L2.5,2.5 L0,9 L-2.5,2.5 L-9,0 L-2.5,-2.5 Z"
+              stroke="#C4952A" stroke-width="0.8" fill="none"
+            />
+            <!-- Inner diamond -->
+            <path
+              d="M0,-4 L4,0 L0,4 L-4,0 Z"
+              stroke="#C4952A" stroke-width="0.5" fill="none" opacity="0.6"
+            />
+          </g>
+        </svg>
+      </div>
+
+      <!-- Sub-headline -->
+      <p class="hero-sub font-body text-lg text-ink-secondary mb-12" style="max-width: 36rem; line-height: 1.6;">
+        Providing vital care, education, and support for orphaned children worldwide.
+        A monthly commitment that continues to give.
+      </p>
+
+      <!-- CTAs -->
+      <div class="hero-ctas flex flex-col sm:flex-row items-start gap-4">
+        <a
+          href="/sponsor"
+          class="btn-primary-lg hero-magnetic-btn"
+          aria-label="Sponsor an Orphan — Begin your monthly commitment"
+        >
+          <span class="btn-slide-bg" aria-hidden="true"></span>
+          <span class="relative z-10">Sponsor an Orphan</span>
+        </a>
+        <a
+          href="/about"
+          class="btn-ghost"
+          aria-label="Learn more about Orphan Aid"
+        >
+          Learn about us
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-10 left-8 lg:left-12 hero-scroll" aria-hidden="true">
+      <div class="scroll-line">
+        <div class="scroll-indicator"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL — full-height editorial photo -->
+  <div class="hero-right relative overflow-hidden">
+    <!-- Ken Burns wrapper — scale animation applied here -->
+    <div class="hero-image-wrap absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=900&q=90&auto=format&fit=crop&crop=faces,center"
+        alt="Children full of joy, warmth, and hope."
+        class="hero-img absolute inset-0 w-full h-full object-cover"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </div>
+    <!-- Multi-layer gradient overlay: left edge blend + top darkening + bottom vignette -->
+    <div
+      class="absolute inset-0 pointer-events-none"
+      style="background:
+        linear-gradient(to right, rgba(248,243,235,0.25) 0%, transparent 20%),
+        linear-gradient(to bottom, rgba(28,18,8,0.45) 0%, transparent 30%),
+        linear-gradient(to top, rgba(28,18,8,0.5) 0%, transparent 40%);"
+      aria-hidden="true"
+    ></div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100svh;
+  }
+
+  /* Left panel — parchment, takes 50% on desktop */
+  .hero-left {
+    width: 100%;
+    background-color: var(--color-bg);
+    order: 2;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-left {
+      width: 50%;
+      min-height: 100svh;
+      order: 0;
+    }
+  }
+
+  /* Right panel — editorial photo, 50% on desktop — equal weight with text */
+  .hero-right {
+    width: 100%;
+    height: 55vw;
+    max-height: 60vh;
+    flex-shrink: 0;
+    order: 1;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-right {
+      width: 50%;
+      height: auto;
+      max-height: none;
+      min-height: 100svh;
+      order: 0;
+    }
+  }
+
+  /* Ken Burns on image wrapper — scale animation, GPU composited */
+  .hero-image-wrap {
+    animation: ken-burns 9s ease-out forwards;
+    transform-origin: center center;
+  }
+
+  @keyframes ken-burns {
+    from { transform: scale(1.0); }
+    to   { transform: scale(1.07); }
+  }
+
+  /* Radial warmth gradient — very subtle gold glow from center */
+  .hero-glow {
+    background: radial-gradient(
+      ellipse 80% 70% at 50% 40%,
+      rgba(196, 149, 42, 0.07) 0%,
+      transparent 65%
+    );
+  }
+
+  /* Gold flanking dashes on label */
+  .hero-label-dash {
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+    background-color: var(--color-gold, #C4952A);
+  }
+
+  /* Geo line stroke animation setup */
+  .geo-line-left {
+    stroke-dasharray: 185;
+    stroke-dashoffset: 185;
+  }
+  .geo-line-right {
+    stroke-dasharray: 185;
+    stroke-dashoffset: 185;
+  }
+
+  /* Large primary button — with clip-path hover slide */
+  .btn-primary-lg {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    background-color: var(--color-teal);
+    color: var(--color-teal-text);
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    cursor: pointer;
+    overflow: hidden;
+    min-width: 200px;
+  }
+
+  /* Slide-from-left hover layer */
+  .btn-slide-bg {
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-teal-hover);
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-primary-lg:hover .btn-slide-bg {
+    clip-path: inset(0 0% 0 0);
+  }
+
+  /* Ghost button */
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc(1rem - 1px) calc(2rem - 1px);
+    background-color: transparent;
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    transition: border-color var(--duration-fast) var(--ease-out-quart),
+                color var(--duration-fast) var(--ease-out-quart);
+    min-width: 200px;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--color-ink-DEFAULT, #1C1208);
+    color: var(--color-text);
+  }
+
+  /* Scroll indicator */
+  .scroll-line {
+    width: 1px;
+    height: 60px;
+    background-color: var(--color-border);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .scroll-indicator {
+    width: 100%;
+    height: 50%;
+    background-color: var(--color-gold);
+    animation: scroll-drop 1.8s ease-in-out infinite;
+  }
+
+  @keyframes scroll-drop {
+    0%   { transform: translateY(-100%); }
+    50%  { transform: translateY(100%); }
+    100% { transform: translateY(200%); }
+  }
+
+  @keyframes hero-ornament-rotate {
+    from { transform: rotate(0deg); transform-origin: center; }
+    to   { transform: rotate(360deg); transform-origin: center; }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  if (!prefersReducedMotion) {
+    // Hero entrance sequence — staggered, deliberate
+    const tl = gsap.timeline({ delay: 0.2 })
+
+    // Right panel fades in concurrently with the label
+    tl.fromTo('.hero-right',
+      { opacity: 0 },
+      { opacity: 1, duration: 1.2, ease: 'power3.out' },
+      0
+    )
+    .fromTo('.hero-label',
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' },
+      0.1
+    )
+    .fromTo('.hero-line',
+      { y: '105%' },
+      { y: '0%', duration: 0.85, ease: 'power4.out', stagger: 0.13 },
+      '-=0.4'
+    )
+    .fromTo('.hero-sub',
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' },
+      '-=0.3'
+    )
+    .fromTo('.hero-ctas',
+      { opacity: 0, y: 12 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
+      '-=0.3'
+    )
+    .fromTo('.hero-scroll',
+      { opacity: 0 },
+      { opacity: 1, duration: 0.6, ease: 'power2.out' },
+      '-=0.2'
+    )
+
+    // Geo line draws after headline
+    gsap.to('.geo-line-left', {
+      strokeDashoffset: 0,
+      duration: 1.1,
+      ease: 'power2.inOut',
+      delay: 0.9,
+    })
+    gsap.to('.geo-line-right', {
+      strokeDashoffset: 0,
+      duration: 1.1,
+      ease: 'power2.inOut',
+      delay: 1.05,
+    })
+
+    // Hero image parallax on scroll — applied to img (not wrapper) to avoid Ken Burns conflict
+    gsap.to('.hero-img', {
+      yPercent: -10,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true,
+      },
+    })
+
+    // Magnetic CTA effect — subtle 8px pull on hover
+    const magneticBtn = document.querySelector('.hero-magnetic-btn') as HTMLElement | null
+    if (magneticBtn) {
+      magneticBtn.addEventListener('mousemove', (e: MouseEvent) => {
+        const rect = magneticBtn.getBoundingClientRect()
+        const centerX = rect.left + rect.width / 2
+        const centerY = rect.top + rect.height / 2
+        const pullX = (e.clientX - centerX) / rect.width * 8
+        const pullY = (e.clientY - centerY) / rect.height * 8
+        gsap.to(magneticBtn, { x: pullX, y: pullY, duration: 0.35, ease: 'power2.out' })
+      })
+      magneticBtn.addEventListener('mouseleave', () => {
+        gsap.to(magneticBtn, { x: 0, y: 0, duration: 0.5, ease: 'power3.out' })
+      })
+    }
+  }
+</script>

@@ -1,0 +1,242 @@
+---
+const navLinks = [
+  { href: '/about', label: 'About' },
+  { href: '/donate', label: 'Donate' },
+  { href: '/volunteer', label: 'Volunteer' },
+]
+
+const currentPath = Astro.url.pathname
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 left-0 right-0 z-[200] transition-all duration-normal"
+  role="banner"
+>
+  <div class="container">
+    <nav
+      class="flex items-center justify-between py-6 lg:py-7"
+      aria-label="Main navigation"
+    >
+      <!-- Wordmark -->
+      <a
+        href="/"
+        class="group flex items-center gap-3 no-underline"
+        aria-label="Orphan Aid — Home"
+      >
+        <!-- Geometric mark: thin gold 8-point star SVG -->
+        <svg
+          width="28"
+          height="28"
+          viewBox="0 0 28 28"
+          fill="none"
+          aria-hidden="true"
+          class="flex-shrink-0 transition-transform duration-400 ease-out-quart group-hover:rotate-[22.5deg]"
+        >
+          <path
+            d="M14 2L16.1 9.9L22.6 5.4L18.1 11.9L26 14L18.1 16.1L22.6 22.6L16.1 18.1L14 26L11.9 18.1L5.4 22.6L9.9 16.1L2 14L9.9 11.9L5.4 5.4L11.9 9.9Z"
+            stroke="#C4952A"
+            stroke-width="1"
+            fill="none"
+          />
+        </svg>
+        <span
+          class="font-heading text-lg tracking-tight text-ink"
+          style="font-size: 1.25rem; letter-spacing: -0.01em;"
+        >
+          Orphan Aid
+        </span>
+      </a>
+
+      <!-- Desktop nav -->
+      <div class="hidden lg:flex items-center gap-10">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class={`nav-link font-body text-sm font-medium tracking-wide uppercase relative py-3 text-ink-secondary hover:text-ink transition-colors duration-fast ${currentPath.startsWith(link.href) ? 'text-ink after:scale-x-100' : ''}`}
+          >
+            {link.label}
+          </a>
+        ))}
+
+        <a
+          href="/sponsor"
+          class="btn-primary"
+          aria-label="Sponsor an Orphan — Start your monthly commitment"
+        >
+          Sponsor an Orphan
+        </a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <button
+        id="mobile-menu-btn"
+        class="lg:hidden flex flex-col gap-[5px] p-2 -mr-2"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="block w-6 h-px bg-ink transition-all duration-normal" id="bar1"></span>
+        <span class="block w-6 h-px bg-ink transition-all duration-normal" id="bar2"></span>
+        <span class="block w-4 h-px bg-ink transition-all duration-normal" id="bar3"></span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="lg:hidden fixed inset-0 z-[-1] bg-bg flex flex-col justify-center items-center gap-10 opacity-0 pointer-events-none transition-opacity duration-400 ease-in-out-quart"
+    aria-hidden="true"
+    role="dialog"
+    aria-label="Navigation menu"
+  >
+    <!-- Close button -->
+    <button
+      id="mobile-menu-close"
+      class="absolute top-6 right-6 p-2 text-ink"
+      aria-label="Close navigation menu"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+    </button>
+
+    <nav class="flex flex-col items-center gap-8" aria-label="Mobile navigation">
+      <a href="/" class="font-heading text-4xl text-ink tracking-tight hover:text-ink-secondary transition-colors">Home</a>
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="font-heading text-4xl text-ink tracking-tight hover:text-ink-secondary transition-colors"
+        >
+          {link.label}
+        </a>
+      ))}
+      <a
+        href="/contact"
+        class="font-heading text-4xl text-ink tracking-tight hover:text-ink-secondary transition-colors"
+      >
+        Contact
+      </a>
+    </nav>
+
+    <a href="/sponsor" class="btn-primary mt-4">Sponsor an Orphan</a>
+  </div>
+</header>
+
+<style>
+  /* Nav link underline draw */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 12px; /* matches py-3 so underline sits at text baseline */
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--duration-fast) var(--ease-out-quart);
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    transform: scaleX(1);
+  }
+
+  /* Always-present frosted parchment — ensures readable nav over any background */
+  #site-header {
+    background-color: rgba(248, 243, 235, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  /* Scrolled header — becomes more opaque and gains a bottom border */
+  #site-header.scrolled {
+    background-color: rgba(248, 243, 235, 0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  /* Primary button */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--color-teal);
+    color: var(--color-teal-text);
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    transition: background-color var(--duration-fast) var(--ease-out-quart);
+    white-space: nowrap;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-teal-hover);
+  }
+</style>
+
+<script>
+  // Scrolled state
+  const header = document.getElementById('site-header')
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      header?.classList.add('scrolled')
+    } else {
+      header?.classList.remove('scrolled')
+    }
+  }, { passive: true })
+
+  // Mobile menu
+  const menuBtn = document.getElementById('mobile-menu-btn')
+  const closeBtn = document.getElementById('mobile-menu-close')
+  const mobileMenu = document.getElementById('mobile-menu')
+  const bar1 = document.getElementById('bar1')
+  const bar2 = document.getElementById('bar2')
+  const bar3 = document.getElementById('bar3')
+
+  function openMenu() {
+    mobileMenu?.classList.remove('opacity-0', 'pointer-events-none')
+    mobileMenu?.classList.add('opacity-100')
+    mobileMenu?.setAttribute('aria-hidden', 'false')
+    menuBtn?.setAttribute('aria-expanded', 'true')
+    document.body.style.overflow = 'hidden'
+    // Animate bars to X
+    if (bar1) { bar1.style.transform = 'translateY(6px) rotate(45deg)' }
+    if (bar2) { bar2.style.opacity = '0' }
+    if (bar3) { bar3.style.transform = 'translateY(-6px) rotate(-45deg)'; bar3.style.width = '1.5rem' }
+  }
+
+  function closeMenu() {
+    mobileMenu?.classList.add('opacity-0', 'pointer-events-none')
+    mobileMenu?.classList.remove('opacity-100')
+    mobileMenu?.setAttribute('aria-hidden', 'true')
+    menuBtn?.setAttribute('aria-expanded', 'false')
+    document.body.style.overflow = ''
+    if (bar1) { bar1.style.transform = '' }
+    if (bar2) { bar2.style.opacity = '' }
+    if (bar3) { bar3.style.transform = ''; bar3.style.width = '' }
+  }
+
+  menuBtn?.addEventListener('click', openMenu)
+  closeBtn?.addEventListener('click', closeMenu)
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu()
+  })
+
+  // Close on nav link click
+  mobileMenu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeMenu)
+  })
+</script>

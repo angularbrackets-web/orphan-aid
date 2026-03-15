@@ -1,0 +1,168 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import CovenantCTA from '@/components/sections/CovenantCTA.astro'
+---
+
+<Layout
+  title="About"
+  description="Orphan Aid is a registered Canadian charity founded to provide consistent care, education, and support for orphaned children worldwide. Learn about our mission and values."
+  canonical="/about"
+  keywords={['about Orphan Aid', 'Canadian charity orphans', 'Islamic charity mission Canada', 'registered charity Surrey BC', 'orphan care mission', 'kafala charity Canada', 'transparent Islamic charity']}
+>
+  <!-- Page hero -->
+  <section class="page-hero" aria-label="About Orphan Aid">
+    <div class="container py-48 lg:py-56">
+      <div class="max-w-3xl">
+        <p class="label mb-6">Our Story</p>
+        <h1 class="h1 text-ink mb-6">
+          Built on the belief that<br />every orphan deserves<br />
+          <em style="font-style: italic;">someone who keeps their promise.</em>
+        </h1>
+        <div class="w-16 mt-8 mb-6" aria-hidden="true">
+          <svg width="64" height="2" viewBox="0 0 64 2">
+            <line x1="0" y1="1" x2="64" y2="1" stroke="#C4952A" stroke-width="1.5" class="geo-line-path"/>
+          </svg>
+        </div>
+        <p class="font-body text-lg text-ink-secondary leading-relaxed" style="max-width: 32rem;">
+          A registered Canadian charity built by community members who believe the promise of care — once made to a child — must be kept.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="container" aria-hidden="true">
+    <svg class="geo-line-svg" viewBox="0 0 1200 2" height="2" preserveAspectRatio="none">
+      <line x1="0" y1="1" x2="1200" y2="1" stroke="#D4A84B" stroke-width="1" class="geo-line-path"/>
+    </svg>
+  </div>
+
+  <!-- Origin story -->
+  <section class="section" aria-label="Our founding story">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div class="lg:col-span-4 aos">
+          <p class="label mb-4">How it began</p>
+        </div>
+        <div class="lg:col-span-7 lg:col-start-6 space-y-6">
+          <p class="font-body text-base text-ink-secondary leading-relaxed aos">
+            Orphan Aid was founded in Surrey, British Columbia, by a circle of Muslim-Canadian families who kept returning to one question: why should the quality of a child's life depend on the accident of where they were born?
+          </p>
+          <p class="font-body text-base text-ink-secondary leading-relaxed aos" data-delay="0.1">
+            They couldn't find a satisfying answer. So they built something to change it — a charity grounded in the Islamic principle of kafala, the duty of care for children without parents, and designed for the realities of modern Canadian donors who want to give with confidence and receive proof of impact.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="container" aria-hidden="true">
+    <svg class="geo-line-svg" viewBox="0 0 1200 2" height="2" preserveAspectRatio="none">
+      <line x1="0" y1="1" x2="1200" y2="1" stroke="#D4A84B" stroke-width="1" class="geo-line-path"/>
+    </svg>
+  </div>
+
+  <!-- Mission -->
+  <section class="section" aria-label="Our mission">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div class="lg:col-span-4 aos">
+          <p class="label mb-4">Mission</p>
+        </div>
+        <div class="lg:col-span-7 lg:col-start-6">
+          <p
+            class="font-heading text-ink aos"
+            style="font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.35; letter-spacing: -0.015em;"
+          >
+            To uplift orphaned children through consistent care, quality education,
+            and the kind of sustained support that transforms a child's trajectory —
+            not just their circumstances.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="container" aria-hidden="true">
+    <svg class="geo-line-svg" viewBox="0 0 1200 2" height="2" preserveAspectRatio="none">
+      <line x1="0" y1="1" x2="1200" y2="1" stroke="#D4A84B" stroke-width="1" class="geo-line-path"/>
+    </svg>
+  </div>
+
+  <!-- Values -->
+  <section class="section bg-bg-subtle" aria-label="Our values">
+    <div class="container">
+      <div class="aos mb-16">
+        <p class="label mb-4">What we stand for</p>
+        <h2 class="h2 text-ink">Our values.</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-12">
+        {[
+          {
+            title: 'Dignity above all',
+            body: 'We never reduce a child to their suffering. Every child we support is a full person with a future — and our programmes reflect that belief.',
+          },
+          {
+            title: 'Radical transparency',
+            body: 'Every dollar is accounted for. We publish clear breakdowns of how sponsorship funds are allocated and invite scrutiny — because trust is earned, not assumed.',
+          },
+          {
+            title: 'Community accountability',
+            body: 'Orphan Aid is governed by community members. We answer to the families and communities we serve, not to donors alone.',
+          },
+          {
+            title: 'Sustained commitment',
+            body: 'Short-term charity doesn\'t change trajectories. We build long-term sponsorship relationships because that is what actually works.',
+          },
+        ].map((value, i) => (
+          <div class="aos" data-delay={String(i * 0.1)}>
+            <div class="mb-4" aria-hidden="true">
+              <div class="w-8 h-px bg-gold"></div>
+            </div>
+            <h3 class="h3 text-ink mb-3">{value.title}</h3>
+            <p class="font-body text-base text-ink-secondary leading-relaxed">{value.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Registration -->
+  <section class="section" aria-label="Charity registration">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-5 aos">
+          <p class="label mb-4">Registered Canadian Charity</p>
+          <h2 class="h2 text-ink mb-6">Accountable to<br />the law and to you.</h2>
+          <p class="font-body text-base text-ink-secondary leading-relaxed mb-8">
+            Orphan Aid is a registered charitable organisation under Canadian law.
+            All donations are eligible for a Canadian tax receipt.
+            Our registration number is available upon request.
+          </p>
+          <div class="space-y-2">
+            <p class="font-body text-sm text-ink-secondary">
+              <span class="label mr-2">Registration</span>
+              #891782436 RR 0001
+            </p>
+            <p class="font-body text-sm text-ink-secondary">
+              <span class="label mr-2">Registered</span>
+              Surrey, British Columbia, Canada
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CovenantCTA />
+</Layout>
+
+<style>
+  .page-hero {
+    background-color: var(--color-bg);
+    padding-top: 5rem;
+  }
+</style>

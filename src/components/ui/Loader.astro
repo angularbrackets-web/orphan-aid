@@ -1,0 +1,131 @@
+---
+// Loader — The Covenant
+// Parchment canvas + thin gold progress bar + geometric ornament
+// Exits cleanly upward; calls window.__loaderComplete when done
+// Immediately completes on prefers-reduced-motion
+---
+
+<div id="oa-loader" aria-hidden="true" role="presentation">
+  <!-- Geometric ornament — centred -->
+  <div id="oa-loader-mark" aria-hidden="true">
+    <svg
+      width="32"
+      height="32"
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <!-- 8-pointed star matching nav wordmark -->
+      <path
+        d="M16 2L18.4 11.6L26 7L21.4 14.6L31 16L21.4 17.4L26 25L18.4 20.4L16 30L13.6 20.4L6 25L10.6 17.4L1 16L10.6 14.6L6 7L13.6 11.6Z"
+        stroke="#C4952A"
+        stroke-width="1"
+        fill="none"
+      />
+    </svg>
+  </div>
+
+  <!-- Progress track -->
+  <div id="oa-loader-track" aria-hidden="true">
+    <div id="oa-loader-bar"></div>
+  </div>
+</div>
+
+<style>
+  #oa-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background-color: var(--color-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    /* Will be translated out by GSAP */
+    will-change: transform;
+  }
+
+  #oa-loader-mark {
+    opacity: 0;
+  }
+
+  #oa-loader-track {
+    width: min(280px, 60vw);
+    height: 1px;
+    background-color: var(--color-border);
+    overflow: hidden;
+    position: relative;
+  }
+
+  #oa-loader-bar {
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-gold);
+    transform: scaleX(0);
+    transform-origin: left center;
+    will-change: transform;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap'
+
+  const loader = document.getElementById('oa-loader')
+  const mark = document.getElementById('oa-loader-mark')
+  const bar = document.getElementById('oa-loader-bar')
+
+  // Announce to layout script when complete
+  function complete() {
+    if (typeof (window as any).__onLoaderComplete === 'function') {
+      (window as any).__onLoaderComplete()
+    }
+    window.dispatchEvent(new CustomEvent('oa:loaderComplete'))
+  }
+
+  // Reduced motion — skip entirely
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    loader?.remove()
+    complete()
+  } else {
+    // Fade ornament in, draw progress bar, then wipe loader out
+    const tl = gsap.timeline({
+      onComplete: () => {
+        gsap.to(loader, {
+          yPercent: -100,
+          duration: 0.8,
+          ease: 'power4.inOut',
+          onComplete: () => {
+            loader?.remove()
+            complete()
+          },
+        })
+      },
+    })
+
+    tl.to(mark, {
+      opacity: 1,
+      duration: 0.5,
+      ease: 'power2.out',
+    })
+    .to(
+      bar,
+      {
+        scaleX: 1,
+        duration: 1.1,
+        ease: 'power2.inOut',
+        transformOrigin: 'left center',
+      },
+      '-=0.2'
+    )
+    .to(
+      mark,
+      {
+        opacity: 0,
+        duration: 0.3,
+        ease: 'power2.in',
+      },
+      '-=0.2'
+    )
+  }
+</script>
