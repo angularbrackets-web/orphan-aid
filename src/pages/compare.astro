@@ -1,4 +1,6 @@
 ---
+// Compare page — Option B: Dark Olive #2A3318
+// Visit /compare to see Option B alongside Option A at /
 import Layout from '@/layouts/Layout.astro'
 import HeroV2 from '@/components/sections/HeroV2.astro'
 import QuoteBar from '@/components/sections/QuoteBar.astro'
@@ -12,17 +14,21 @@ import CovenantCTAV2 from '@/components/sections/CovenantCTAV2.astro'
 ---
 
 <Layout
-  title="Home"
-  description="Sponsor an orphan and give a child consistent care, education, and hope. Orphan Aid is a registered Canadian charity with full tax receipts. From $35/month."
-  canonical="/"
+  title="Compare — Option B"
+  description="Color comparison — Option B Dark Olive"
+  canonical="/compare"
 >
-  <HeroV2 />
-  <QuoteBar />
-  <ImpactStats variant="gold-band" />
-  <StoryRows />
-  <DisplayMoment />
-  <ChildProfiles />
-  <AmountPickerSection />
-  <DonorTestimonials />
-  <CovenantCTAV2 />
+  <!-- Option B overrides: Dark Olive #2A3318 -->
+  <!-- RGB: 42, 51, 24 -->
+  <div style="--color-teal: #2A3318; --color-teal-hover: #1E280F; --color-teal-rgb: 42, 51, 24;">
+    <HeroV2 />
+    <QuoteBar />
+    <ImpactStats variant="teal-band" />
+    <StoryRows />
+    <DisplayMoment />
+    <ChildProfiles />
+    <AmountPickerSection />
+    <DonorTestimonials />
+    <CovenantCTAV2 />
+  </div>
 </Layout>

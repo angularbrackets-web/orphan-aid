@@ -1,0 +1,145 @@
+---
+// Covenant CTA V2 — Centered single-column layout.
+// Hadith quote moved to QuoteBar (near hero). This section is pure CTA focus.
+---
+
+<section class="cta-v2-section" aria-label="Begin your covenant">
+
+  <!-- 8-point star ornament — centered -->
+  <div class="cta-v2-ornament" aria-hidden="true">
+    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M22 4L25.2 14.2L35 11L29 19.5L38 25.5L27 25.5L28.8 36.5L22 31L15.2 36.5L17 25.5L6 25.5L15 19.5L9 11L18.8 14.2Z"
+        stroke="#C4952A" stroke-width="0.9" fill="none"
+      />
+      <circle cx="22" cy="22" r="6" stroke="#C4952A" stroke-width="0.5" fill="none" opacity="0.4"/>
+    </svg>
+  </div>
+
+  <h2 class="cta-v2-heading">Begin your covenant today.</h2>
+
+  <p class="cta-v2-body">
+    A monthly sponsorship is more than a donation. It's a promise that keeps giving — to a child, and to you.
+  </p>
+
+  <a
+    href="/sponsor"
+    class="cta-v2-btn"
+    aria-label="Sponsor an Orphan — begin your monthly commitment"
+  >
+    <span class="cta-v2-btn-slide" aria-hidden="true"></span>
+    <span class="relative z-10">Sponsor an Orphan</span>
+  </a>
+
+  <p class="cta-v2-note">From $35 CAD / month · Tax receipts provided</p>
+
+</section>
+
+<style>
+  .cta-v2-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 8rem 2rem;
+    background-color: var(--color-teal);
+    overflow: hidden;
+  }
+
+  .cta-v2-ornament {
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+  }
+
+  .cta-v2-heading {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: #FFFFFF;
+    margin: 0 0 1.25rem;
+    max-width: 16ch;
+  }
+
+  .cta-v2-body {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: rgba(253, 250, 245, 0.68);
+    max-width: 42ch;
+    margin: 0 0 2.75rem;
+  }
+
+  /* Gold CTA button */
+  .cta-v2-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2.5rem;
+    background-color: var(--color-gold-DEFAULT, #C4952A);
+    color: #1C1208;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    overflow: hidden;
+    min-width: 224px;
+    margin-bottom: 1.25rem;
+  }
+
+  .cta-v2-btn-slide {
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-gold-light, #D4A84B);
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .cta-v2-btn:hover .cta-v2-btn-slide {
+    clip-path: inset(0 0% 0 0);
+  }
+
+  .cta-v2-note {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    letter-spacing: 0.03em;
+    color: rgba(253, 250, 245, 0.38);
+    margin: 0;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  if (!prefersReducedMotion) {
+    const section = document.querySelector('.cta-v2-section')
+    if (section) {
+      const items = section.querySelectorAll(
+        '.cta-v2-ornament, .cta-v2-heading, .cta-v2-body, .cta-v2-btn, .cta-v2-note'
+      )
+      gsap.fromTo(items,
+        { opacity: 0, y: 22 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.75,
+          ease: 'power3.out',
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 75%',
+            once: true,
+          },
+        }
+      )
+    }
+  }
+</script>

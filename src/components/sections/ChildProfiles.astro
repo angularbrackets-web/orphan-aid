@@ -1,0 +1,454 @@
+---
+// Child Profiles — Beautiful sponsorship profile cards.
+// Responsive grid (4-col desktop, 2-col tablet, 1-col mobile).
+// UIverse-inspired: shimmer sweep, gold glow shadow, photo zoom, animated gold top strip.
+
+const children = [
+  {
+    name: 'Amira',
+    age: 8,
+    country: 'Jordan',
+    amount: 35,
+    image: 'https://images.unsplash.com/photo-1594608661623-aa0bd3a69d98?w=600&q=85&auto=format&fit=crop&crop=faces,top',
+    alt: 'A young girl with a warm, hopeful expression.',
+  },
+  {
+    name: 'Yusuf',
+    age: 11,
+    country: 'Syria',
+    amount: 35,
+    image: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=600&q=85&auto=format&fit=crop&crop=faces,top',
+    alt: 'A young boy looking toward a bright future.',
+  },
+  {
+    name: 'Fatima',
+    age: 6,
+    country: 'Somalia',
+    amount: 35,
+    image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=85&auto=format&fit=crop&crop=faces,top',
+    alt: 'A young girl in warm afternoon light.',
+  },
+  {
+    name: 'Ibrahim',
+    age: 9,
+    country: 'Pakistan',
+    amount: 35,
+    image: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600&q=85&auto=format&fit=crop&crop=faces,top',
+    alt: 'A young boy engaged in learning.',
+  },
+]
+---
+
+<section class="profiles-section section" aria-label="Children awaiting a sponsor">
+
+  <!-- Decorative background blobs -->
+  <div class="profiles-blob profiles-blob-gold"  aria-hidden="true"></div>
+  <div class="profiles-blob profiles-blob-teal"  aria-hidden="true"></div>
+  <div class="profiles-blob profiles-blob-gold2" aria-hidden="true"></div>
+
+  <!-- Section header -->
+  <div class="profiles-header text-center mb-20" style="position:relative; z-index:2;">
+    <p class="label mb-4" style="color: var(--color-teal, #1A3A24);">Children Waiting for a Sponsor</p>
+    <h2 class="h2" style="max-width: 14ch; margin: 0 auto 1.5rem;">
+      Every child has a name.
+    </h2>
+    <!-- Gold divider -->
+    <div class="flex justify-center" aria-hidden="true">
+      <svg width="200" height="2" viewBox="0 0 200 2">
+        <line x1="0" y1="1" x2="200" y2="1" stroke="#D4A84B" stroke-width="1" class="geo-line-path" />
+      </svg>
+    </div>
+    <p class="font-body mt-4" style="max-width: 40ch; margin-left: auto; margin-right: auto; font-size: 1rem; line-height: 1.7; color: var(--color-text-secondary, #6B5B45);">
+      A monthly commitment to one child changes the entire course of a life.
+    </p>
+  </div>
+
+  <!-- Cards grid -->
+  <div class="profiles-grid container" style="position:relative; z-index:2;">
+    {children.map((child, i) => (
+      <article
+        class="profile-card"
+        style={`--card-delay: ${i * 0.12}s`}
+        aria-label={`${child.name}, age ${child.age}, ${child.country}`}
+      >
+        <!-- Animated gold top strip -->
+        <div class="card-gold-strip" aria-hidden="true"></div>
+
+        <!-- Photo -->
+        <div class="card-photo-wrap">
+          <img
+            src={child.image}
+            alt={child.alt}
+            class="card-photo"
+            loading="lazy"
+            decoding="async"
+          />
+          <!-- Gradient overlay for legibility of badge -->
+          <div class="card-photo-overlay" aria-hidden="true"></div>
+          <!-- Country badge -->
+          <span class="card-country-badge">
+            <svg width="6" height="6" viewBox="0 0 6 6" fill="none" aria-hidden="true" style="flex-shrink:0">
+              <path d="M3 0L3.6 2.1H6L4.2 3.4L4.8 5.5L3 4.2L1.2 5.5L1.8 3.4L0 2.1H2.4Z" fill="#C4952A"/>
+            </svg>
+            {child.country}
+          </span>
+        </div>
+
+        <!-- Card body -->
+        <div class="card-body">
+          <!-- Ornament star -->
+          <div class="card-ornament" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M7 0L8.2 4.6H13L9.5 7.4L10.7 12L7 9.2L3.3 12L4.5 7.4L1 4.6H5.8Z" stroke="#C4952A" stroke-width="0.8" fill="none"/>
+            </svg>
+          </div>
+
+          <h3 class="card-name">{child.name}</h3>
+          <p class="card-age">Age {child.age}</p>
+
+          <div class="card-divider" aria-hidden="true"></div>
+
+          <p class="card-amount" aria-label={`$${child.amount} Canadian dollars per month`}>
+            ${child.amount}<span class="card-amount-unit"> CAD / mo</span>
+          </p>
+
+          <a
+            href="/sponsor"
+            class="card-cta"
+            aria-label={`Sponsor ${child.name} for $${child.amount} per month`}
+          >
+            Sponsor {child.name}
+          </a>
+        </div>
+
+        <!-- Shimmer sweep on hover -->
+        <div class="card-shimmer" aria-hidden="true"></div>
+      </article>
+    ))}
+  </div>
+
+  <p class="profiles-footnote" style="position:relative; z-index:2;">
+    Child names and photos are representative. Actual sponsorship profiles assigned upon sign-up.
+  </p>
+
+</section>
+
+<style>
+  .profiles-section {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-bg, #F8F3EB);
+  }
+
+  /* ── Background blobs ──────────────────────────────────────── */
+  .profiles-blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(80px);
+    animation: bg-blob-float 22s ease-in-out infinite;
+  }
+
+  .profiles-blob-gold {
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle, rgba(196,149,42,0.14) 0%, transparent 70%);
+    top: -160px;
+    right: -120px;
+    animation-duration: 28s;
+  }
+
+  .profiles-blob-teal {
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(26,58,36,0.08) 0%, transparent 70%);
+    bottom: -100px;
+    left: -80px;
+    animation-duration: 20s;
+    animation-delay: -9s;
+  }
+
+  .profiles-blob-gold2 {
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, rgba(196,149,42,0.09) 0%, transparent 70%);
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-duration: 24s;
+    animation-delay: -14s;
+  }
+
+  @keyframes bg-blob-float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%        { transform: translate(25px, -20px) scale(1.06); }
+    66%        { transform: translate(-18px, 18px) scale(0.94); }
+  }
+
+  .profiles-blob-gold2 {
+    animation-name: bg-blob-float-centre;
+  }
+
+  @keyframes bg-blob-float-centre {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50%        { transform: translateX(-50%) scale(1.1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .profiles-blob { animation: none; }
+  }
+
+  /* ── Grid ──────────────────────────────────────────────────── */
+  .profiles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  @media (min-width: 768px) {
+    .profiles-grid {
+      gap: 16px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .profiles-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+  }
+
+  /* ── Card ──────────────────────────────────────────────────── */
+  .profile-card {
+    position: relative;
+    background: linear-gradient(160deg, #F8F3EB 0%, #F0E9DA 100%);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow:
+      0 2px 10px rgba(26, 58, 36, 0.06),
+      0 0 0 1px rgba(196, 149, 42, 0.16);
+    transition:
+      transform 350ms var(--ease-out-quart, cubic-bezier(0.25,1,0.5,1)),
+      box-shadow 350ms var(--ease-out-quart, cubic-bezier(0.25,1,0.5,1));
+    cursor: pointer;
+  }
+
+  .profile-card:hover {
+    transform: translateY(-10px);
+    box-shadow:
+      0 24px 56px rgba(196, 149, 42, 0.20),
+      0 8px 20px rgba(26, 58, 36, 0.10),
+      0 0 0 1px rgba(196, 149, 42, 0.38);
+  }
+
+  /* ── Animated gold top strip ───────────────────────────────── */
+  .card-gold-strip {
+    height: 3px;
+    background: linear-gradient(90deg, #C4952A 0%, #E8C06A 40%, #D4A84B 55%, #C4952A 100%);
+    background-size: 220% auto;
+    animation: gold-strip-flow 3s linear infinite;
+    animation-delay: var(--card-delay, 0s);
+  }
+
+  @keyframes gold-strip-flow {
+    0%   { background-position:   0% center; }
+    100% { background-position: 220% center; }
+  }
+
+  /* ── Photo ─────────────────────────────────────────────────── */
+  .card-photo-wrap {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+
+  .card-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    transition: transform 600ms var(--ease-out-quart, cubic-bezier(0.25,1,0.5,1));
+    will-change: transform;
+  }
+
+  .profile-card:hover .card-photo {
+    transform: scale(1.07);
+  }
+
+  /* Subtle dark gradient at photo bottom for badge contrast */
+  .card-photo-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(26,58,36,0.45) 0%, transparent 45%);
+    pointer-events: none;
+  }
+
+  /* Country badge */
+  .card-country-badge {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px;
+    background: rgba(26, 58, 36, 0.80);
+    backdrop-filter: blur(6px);
+    color: rgba(248, 243, 235, 0.92);
+    font-family: var(--font-body);
+    font-size: 0.5625rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    border: 1px solid rgba(196, 149, 42, 0.35);
+  }
+
+  /* ── Card body ─────────────────────────────────────────────── */
+  .card-body {
+    padding: 1.25rem 1.375rem 1.5rem;
+  }
+
+  .card-ornament {
+    margin-bottom: 8px;
+    opacity: 0.7;
+  }
+
+  .card-name {
+    font-family: var(--font-heading);
+    font-size: clamp(1.625rem, 2.2vw, 1.875rem);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--color-ink-DEFAULT, #1C1208);
+    margin: 0 0 2px;
+    line-height: 1.05;
+  }
+
+  .card-age {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    letter-spacing: 0.03em;
+    color: var(--color-ink-muted, #9A8872);
+    margin: 0 0 14px;
+  }
+
+  .card-divider {
+    height: 1px;
+    background: linear-gradient(90deg, rgba(196,149,42,0.5), rgba(196,149,42,0.18), transparent);
+    margin-bottom: 14px;
+  }
+
+  .card-amount {
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 2.5vw, 2.125rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--color-gold, #C4952A);
+    line-height: 1;
+    margin: 0 0 18px;
+  }
+
+  .card-amount-unit {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    color: var(--color-ink-muted, #9A8872);
+  }
+
+  /* CTA button */
+  .card-cta {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: var(--color-teal, #1A3A24);
+    color: rgba(253, 250, 245, 0.95);
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 2px;
+    transition:
+      background-color 200ms ease,
+      letter-spacing 200ms ease;
+  }
+
+  .card-cta:hover {
+    background-color: var(--color-teal-hover, #102818);
+    letter-spacing: 0.13em;
+  }
+
+  /* ── Shimmer sweep ─────────────────────────────────────────── */
+  .card-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 30%,
+      rgba(196, 149, 42, 0.08) 50%,
+      transparent 70%
+    );
+    transform: translateX(-110%);
+    transition: transform 700ms ease;
+    pointer-events: none;
+    z-index: 4;
+  }
+
+  .profile-card:hover .card-shimmer {
+    transform: translateX(110%);
+  }
+
+  /* ── Footnote ──────────────────────────────────────────────── */
+  .profiles-footnote {
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    color: var(--color-ink-muted, #9A8872);
+    margin-top: 2.5rem;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── Mobile: smaller cards ─────────────────────────────────── */
+  @media (max-width: 480px) {
+    .profiles-grid {
+      grid-template-columns: 1fr;
+      max-width: 320px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  if (!prefersReducedMotion) {
+    // Section header entrance
+    gsap.fromTo('.profiles-header',
+      { opacity: 0, y: 24 },
+      {
+        opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
+        scrollTrigger: { trigger: '.profiles-section', start: 'top 80%', once: true },
+      }
+    )
+
+    // Cards staggered entrance — fade up + slight scale
+    gsap.fromTo('.profile-card',
+      { opacity: 0, y: 40, scale: 0.96 },
+      {
+        opacity: 1, y: 0, scale: 1,
+        duration: 0.65,
+        ease: 'power3.out',
+        stagger: 0.12,
+        scrollTrigger: { trigger: '.profiles-grid', start: 'top 85%', once: true },
+      }
+    )
+  }
+</script>

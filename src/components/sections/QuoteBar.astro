@@ -1,0 +1,188 @@
+---
+// QuoteBar — Prophetic pull-quote section between Hero and ImpactStats.
+// Parchment background (matches hero wave fill) + animated geometric grid texture.
+import AnimatedGridPattern from '@/components/react/AnimatedGridPattern.tsx'
+---
+
+<section class="quotebar-section" aria-label="Prophetic inspiration">
+
+  <!-- Animated gold grid texture on parchment -->
+  <div class="quotebar-grid" aria-hidden="true">
+    <AnimatedGridPattern client:visible numSquares={28} maxOpacity={0.09} duration={5} color="#C4952A" />
+  </div>
+
+  <!-- Gold top rule -->
+  <div class="quotebar-rule-top" aria-hidden="true"></div>
+
+  <!-- Large rotating background ornament -->
+  <div class="quotebar-bg-ornament" aria-hidden="true">
+    <svg viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="160" cy="160" r="158" stroke="#C4952A" stroke-width="0.6" opacity="0.12"/>
+      <circle cx="160" cy="160" r="130" stroke="#C4952A" stroke-width="0.4" stroke-dasharray="3 7" opacity="0.10"/>
+      <circle cx="160" cy="160" r="100" stroke="#C4952A" stroke-width="0.4" opacity="0.08"/>
+      <!-- 8-pointed star -->
+      <path
+        d="M160 40L170 95H228L183 130L198 185L160 155L122 185L137 130L92 95H150Z"
+        stroke="#C4952A" stroke-width="0.7" fill="none" opacity="0.14"
+      />
+      <!-- Cardinal lines -->
+      <line x1="160" y1="2"   x2="160" y2="30"  stroke="#C4952A" stroke-width="0.5" opacity="0.15"/>
+      <line x1="318" y1="160" x2="290" y2="160" stroke="#C4952A" stroke-width="0.5" opacity="0.15"/>
+      <line x1="160" y1="318" x2="160" y2="290" stroke="#C4952A" stroke-width="0.5" opacity="0.15"/>
+      <line x1="2"   y1="160" x2="30"  y2="160" stroke="#C4952A" stroke-width="0.5" opacity="0.15"/>
+      <!-- Centre dot -->
+      <circle cx="160" cy="160" r="4" stroke="#C4952A" stroke-width="0.8" opacity="0.2"/>
+    </svg>
+  </div>
+
+  <div class="quotebar-inner">
+
+    <!-- Flanking ornament: line — star — line -->
+    <div class="quotebar-ornament" aria-hidden="true">
+      <svg width="240" height="16" viewBox="0 0 240 16" fill="none">
+        <line x1="0" y1="8" x2="100" y2="8" stroke="#D4A84B" stroke-width="1"/>
+        <path
+          d="M120 1L122.3 7.3H129L123.7 11.2L125.9 17.5L120 13.6L114.1 17.5L116.3 11.2L111 7.3H117.7Z"
+          stroke="#C4952A" stroke-width="0.8" fill="none"
+        />
+        <line x1="140" y1="8" x2="240" y2="8" stroke="#D4A84B" stroke-width="1"/>
+      </svg>
+    </div>
+
+    <blockquote class="quotebar-quote">
+      <p class="quotebar-text">
+        "The one who cares for an orphan and I will be in paradise like&nbsp;these&nbsp;two."
+      </p>
+      <footer>
+        <cite class="quotebar-attribution">— Prophet Muhammad ﷺ</cite>
+      </footer>
+    </blockquote>
+
+  </div>
+
+  <!-- Gold bottom rule -->
+  <div class="quotebar-rule-bottom" aria-hidden="true"></div>
+
+</section>
+
+<style>
+  .quotebar-section {
+    position: relative;
+    background-color: var(--color-bg, #F8F3EB);
+    overflow: hidden;
+  }
+
+  /* Animated grid layer */
+  .quotebar-grid {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Gold gradient rules top + bottom */
+  .quotebar-rule-top,
+  .quotebar-rule-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(196, 149, 42, 0.55) 20%,
+      rgba(196, 149, 42, 0.55) 80%,
+      transparent 100%
+    );
+  }
+  .quotebar-rule-top    { top: 0; }
+  .quotebar-rule-bottom { bottom: 0; }
+
+  /* Rotating background ornament */
+  .quotebar-bg-ornament {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(260px, 40vw, 380px);
+    pointer-events: none;
+    z-index: 0;
+    animation: qb-rotate 140s linear infinite;
+  }
+
+  @keyframes qb-rotate {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .quotebar-bg-ornament { animation: none; }
+  }
+
+  /* Inner content */
+  .quotebar-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 5.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .quotebar-ornament {
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+
+  .quotebar-quote {
+    margin: 0;
+    padding: 0;
+  }
+
+  .quotebar-text {
+    font-family: var(--font-heading);
+    font-size: clamp(1.375rem, 2.8vw, 2.125rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.38;
+    letter-spacing: -0.01em;
+    color: var(--color-ink-DEFAULT, #1C1208);
+    margin: 0 0 1.25rem;
+  }
+
+  .quotebar-attribution {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted, #9A8872);
+    font-style: normal;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  if (!prefersReducedMotion) {
+    gsap.fromTo('.quotebar-inner',
+      { opacity: 0, y: 24 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.85,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.quotebar-section',
+          start: 'top 82%',
+          once: true,
+        },
+      }
+    )
+  }
+</script>

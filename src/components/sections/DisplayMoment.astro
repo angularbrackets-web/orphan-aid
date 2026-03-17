@@ -1,0 +1,269 @@
+---
+// DisplayMoment — Activist display typography. The emotional peak mid-page.
+// Deep teal palette reversal. Cormorant at maximum scale.
+// Inspired by the typographic architecture of the Virtus NGO site.
+import AnimatedGridPattern from '@/components/react/AnimatedGridPattern.tsx'
+---
+
+<section class="display-moment" aria-label="Our mission">
+
+  <!-- Animated grid texture — gold on teal, very subtle -->
+  <div class="dm-grid-bg" aria-hidden="true">
+    <AnimatedGridPattern client:visible numSquares={40} maxOpacity={0.08} duration={6} color="#C4952A" />
+  </div>
+
+  <div class="dm-inner">
+
+    <!-- Giant display text — left-anchored -->
+    <div class="dm-text" aria-label="Every child deserves a covenant.">
+      <div class="dm-line" aria-hidden="true">
+        <span class="dm-reveal">Every child</span>
+      </div>
+      <div class="dm-line" aria-hidden="true">
+        <span class="dm-reveal">deserves a</span>
+      </div>
+      <div class="dm-line" aria-hidden="true">
+        <em class="dm-reveal dm-gold">covenant.</em>
+      </div>
+    </div>
+
+    <!-- Floating organic blob photo — overlaps text on desktop -->
+    <div class="dm-blob" aria-hidden="true">
+      <img
+        src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=85&auto=format&fit=crop&crop=faces"
+        alt=""
+        class="dm-blob-img"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+  </div>
+
+  <!-- Vertical rotated label — right edge -->
+  <p class="dm-vertical-label" aria-hidden="true">ORPHAN AID · REGISTERED CANADA</p>
+
+  <!-- Geometric accent — bottom left -->
+  <div class="dm-geo" aria-hidden="true">
+    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="40" cy="40" r="39" stroke="#C4952A" stroke-width="0.6" opacity="0.3"/>
+      <circle cx="40" cy="40" r="26" stroke="#C4952A" stroke-width="0.5" opacity="0.2"/>
+      <path
+        d="M40 6L42 18L50 9L45.5 21L58 16L50 26L63 30L50 34L63 40L50 46L63 50L50 54L58 64L45.5 59L50 71L42 62L40 74L38 62L30 71L34.5 59L22 64L30 54L17 50L30 46L17 40L30 34L17 30L30 26L22 16L34.5 21L30 9L38 18Z"
+        stroke="#C4952A"
+        stroke-width="0.5"
+        fill="none"
+        opacity="0.18"
+      />
+    </svg>
+  </div>
+
+</section>
+
+<style>
+  .display-moment {
+    position: relative;
+    background-color: var(--color-teal);
+    overflow: hidden;
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .dm-grid-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Inner — constrains text + positions blob */
+  .dm-inner {
+    position: relative;
+    width: 100%;
+    padding: 7rem max(2rem, calc((100vw - 1280px) / 2 + 2rem));
+    display: flex;
+    align-items: center;
+    min-height: inherit;
+  }
+
+  /* Display text block */
+  .dm-text {
+    position: relative;
+    z-index: 2;
+    max-width: 68%;
+  }
+
+  /* Each line clips the span for wipe reveal */
+  .dm-line {
+    display: block;
+    overflow: hidden;
+    line-height: 0.88;
+    margin-bottom: 0.05em;
+  }
+
+  .dm-reveal {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: clamp(60px, 7.5vw, 112px);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    color: #F8F3EB;
+    line-height: 0.9;
+    white-space: nowrap;
+  }
+
+  .dm-gold {
+    color: #C4952A;
+    font-style: italic;
+  }
+
+  /* Floating blob — right side, overlaps display text zone */
+  .dm-blob {
+    position: absolute;
+    right: max(3rem, calc((100vw - 1280px) / 2 + 3rem));
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(200px, 24vw, 360px);
+    height: clamp(200px, 24vw, 360px);
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 3;
+    animation: dm-blob-drift 10s ease-in-out infinite;
+  }
+
+  .dm-blob-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    transition: transform 600ms ease;
+  }
+
+  @keyframes dm-blob-drift {
+    0%,  100% { border-radius: 50%; }
+    25%        { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    50%        { border-radius: 40% 60% 60% 40% / 30% 60% 40% 60%; }
+    75%        { border-radius: 30% 70% 40% 60% / 60% 30% 70% 40%; }
+  }
+
+  /* Vertical label — far right edge */
+  .dm-vertical-label {
+    position: absolute;
+    right: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-family: var(--font-body);
+    font-size: 0.5625rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: rgba(248, 243, 235, 0.18);
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Geometric accent — bottom left */
+  .dm-geo {
+    position: absolute;
+    bottom: 2.5rem;
+    left: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ── Mobile ─────────────────────────────────────────── */
+  @media (max-width: 767px) {
+    .display-moment {
+      min-height: auto;
+    }
+
+    .dm-inner {
+      flex-direction: column;
+      padding: 5rem 1.5rem 3rem;
+      align-items: flex-start;
+    }
+
+    .dm-text {
+      max-width: 100%;
+    }
+
+    .dm-blob {
+      position: relative;
+      right: auto;
+      top: auto;
+      transform: none;
+      margin: 3rem auto 0;
+      width: 160px;
+      height: 160px;
+    }
+
+    .dm-vertical-label {
+      display: none;
+    }
+
+    .dm-geo {
+      bottom: 1.5rem;
+      left: 1.5rem;
+    }
+  }
+
+  /* ── Tablet ──────────────────────────────────────────── */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .dm-blob {
+      width: 200px;
+      height: 200px;
+      right: 2rem;
+    }
+  }
+
+  /* ── Reduced motion ──────────────────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .dm-blob {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  if (!prefersReducedMotion) {
+    const reveals = document.querySelectorAll('.dm-reveal')
+
+    // Set initial hidden state before scroll fires
+    gsap.set(reveals, { clipPath: 'inset(0 105% 0 0)' })
+
+    // Staggered left-to-right wipe reveal on scroll enter
+    ScrollTrigger.create({
+      trigger: '.display-moment',
+      start: 'top 72%',
+      once: true,
+      onEnter: () => {
+        gsap.to(reveals, {
+          clipPath: 'inset(0 0% 0 0)',
+          duration: 0.95,
+          ease: 'power3.out',
+          stagger: 0.18,
+        })
+      },
+    })
+
+    // Blob: subtle vertical parallax as section scrolls by
+    gsap.to('.dm-blob', {
+      y: -50,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.display-moment',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true,
+      },
+    })
+  }
+</script>

@@ -41,7 +41,7 @@ const currentPath = Astro.url.pathname
           />
         </svg>
         <span
-          class="font-heading text-lg tracking-tight text-ink"
+          class="font-heading text-lg tracking-tight text-ink wordmark-text"
           style="font-size: 1.25rem; letter-spacing: -0.01em;"
         >
           Orphan Aid
@@ -144,14 +144,55 @@ const currentPath = Astro.url.pathname
     transform: scaleX(1);
   }
 
-  /* Always-present frosted parchment — ensures readable nav over any background */
+  /* Default — frosted parchment */
   #site-header {
     background-color: rgba(248, 243, 235, 0.82);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
 
-  /* Scrolled header — becomes more opaque and gains a bottom border */
+  /* Hero mode — blends into the deep green hero */
+  #site-header.hero-mode {
+    background-color: rgba(26, 58, 36, 0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(196, 149, 42, 0.18);
+  }
+
+  #site-header.hero-mode .wordmark-text {
+    color: rgba(253, 250, 245, 0.92) !important;
+  }
+
+  #site-header.hero-mode .nav-link {
+    color: rgba(253, 250, 245, 0.65) !important;
+  }
+
+  #site-header.hero-mode .nav-link:hover {
+    color: rgba(253, 250, 245, 0.95) !important;
+  }
+
+  #site-header.hero-mode .nav-link::after {
+    background-color: rgba(196, 149, 42, 0.8);
+  }
+
+  /* Hamburger bars */
+  #site-header.hero-mode #bar1,
+  #site-header.hero-mode #bar2,
+  #site-header.hero-mode #bar3 {
+    background-color: rgba(253, 250, 245, 0.85) !important;
+  }
+
+  /* CTA button in hero mode — gold so it pops against the green */
+  #site-header.hero-mode .btn-primary {
+    background-color: #C4952A !important;
+    color: #1C1208 !important;
+  }
+
+  #site-header.hero-mode .btn-primary:hover {
+    background-color: #D4A84B !important;
+  }
+
+  /* Scrolled header — full parchment with bottom border */
   #site-header.scrolled {
     background-color: rgba(248, 243, 235, 0.96);
     backdrop-filter: blur(12px);
@@ -186,15 +227,29 @@ const currentPath = Astro.url.pathname
 </style>
 
 <script>
-  // Scrolled state
+  // Nav mode — hero-mode on top of hero, parchment when scrolled past
   const header = document.getElementById('site-header')
-  window.addEventListener('scroll', () => {
+  const heroSection = document.querySelector('.hero-v2') as HTMLElement | null
+
+  function updateNavMode() {
+    if (heroSection) {
+      const heroBottom = heroSection.getBoundingClientRect().bottom
+      if (heroBottom > 80) {
+        header?.classList.add('hero-mode')
+        header?.classList.remove('scrolled')
+        return
+      }
+      header?.classList.remove('hero-mode')
+    }
     if (window.scrollY > 60) {
       header?.classList.add('scrolled')
     } else {
       header?.classList.remove('scrolled')
     }
-  }, { passive: true })
+  }
+
+  window.addEventListener('scroll', updateNavMode, { passive: true })
+  updateNavMode() // set correct state immediately on load
 
   // Mobile menu
   const menuBtn = document.getElementById('mobile-menu-btn')

@@ -17,6 +17,7 @@
     "@tanstack/react-form": "^0.36.0",
     "astro": "^4.16.0",
     "clsx": "^2.1.1",
+    "framer-motion": "^12.37.0",
     "gsap": "^3.12.5",
     "lenis": "^1.1.14",
     "lucide-react": "^0.454.0",

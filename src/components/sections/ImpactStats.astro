@@ -1,4 +1,9 @@
 ---
+interface Props {
+  variant?: 'dark' | 'light' | 'teal-band' | 'gold-band'
+}
+const { variant = 'dark' } = Astro.props
+
 const stats = [
   { value: 847, suffix: '+', label: 'Children Sponsored', sublabel: 'across 14 countries' },
   { value: 12,  suffix: '',  label: 'Years of Service',   sublabel: 'since our founding' },
@@ -6,7 +11,7 @@ const stats = [
 ]
 ---
 
-<section class="impact-section section relative overflow-hidden" aria-label="Our impact">
+<section class={`impact-section section relative overflow-hidden ${variant === 'light' ? 'impact-light' : variant === 'teal-band' ? 'impact-teal' : variant === 'gold-band' ? 'impact-gold' : 'impact-dark'}`} aria-label="Our impact">
   <!-- Warm radial glow — gold at low opacity for depth -->
   <div
     class="absolute inset-0 pointer-events-none"
@@ -28,9 +33,9 @@ const stats = [
             </svg>
           </div>
 
-          <!-- Counter — large, gold -->
+          <!-- Counter — large, gold (or teal for gold-band) -->
           <div
-            class="font-heading mb-3"
+            class={`font-heading mb-3 ${variant === 'gold-band' ? 'impact-gold-counter' : ''}`}
             style="font-size: clamp(4.5rem, 9vw, 7rem); line-height: 0.9; letter-spacing: -0.04em; color: #C4952A;"
             aria-label={`${stat.value}${stat.suffix}`}
           >
@@ -53,16 +58,32 @@ const stats = [
 </section>
 
 <style>
-  .impact-section {
+  /* Dark variant (v1 default) */
+  .impact-dark {
     background-color: #1C1208;
   }
 
-  .impact-label {
+  .impact-dark .impact-label {
     color: rgba(253, 250, 245, 0.6) !important;
   }
 
-  .impact-sublabel {
+  .impact-dark .impact-sublabel {
     color: rgba(253, 250, 245, 0.38);
+  }
+
+  /* Light variant — gold announcement band */
+  .impact-light {
+    background-color: rgba(196, 149, 42, 0.07);
+    border-top: 1px solid rgba(196, 149, 42, 0.22);
+    border-bottom: 1px solid rgba(196, 149, 42, 0.22);
+  }
+
+  .impact-light .impact-label {
+    color: #6B5B45 !important;
+  }
+
+  .impact-light .impact-sublabel {
+    color: #9A8872;
   }
 
   .impact-stat-divider {
@@ -73,6 +94,62 @@ const stats = [
     .impact-stat-divider {
       border-top: none;
       border-left: 1px solid rgba(196, 149, 42, 0.15);
+    }
+  }
+
+  /* Gold-band variant — warm gold wash bg, deep green numbers, ink labels */
+  .impact-gold {
+    background: linear-gradient(180deg, rgba(196,149,42,0.10) 0%, rgba(196,149,42,0.06) 100%);
+    border-top: 1px solid rgba(196, 149, 42, 0.35);
+    border-bottom: 1px solid rgba(196, 149, 42, 0.35);
+  }
+
+  .impact-gold-counter {
+    color: var(--color-teal, #1A3A24) !important;
+  }
+
+  .impact-gold .impact-label {
+    color: #1A3A24 !important;
+  }
+
+  .impact-gold .impact-sublabel {
+    color: #4A7A5A;
+  }
+
+  .impact-gold .impact-stat-divider {
+    border-top: 1px solid rgba(196, 149, 42, 0.2);
+  }
+
+  @media (min-width: 1024px) {
+    .impact-gold .impact-stat-divider {
+      border-top: none;
+      border-left: 1px solid rgba(196, 149, 42, 0.2);
+    }
+  }
+
+  /* Teal-band variant — deep teal bg, gold numbers, cream labels */
+  .impact-teal {
+    background-color: var(--color-teal);
+    border-top: 1px solid rgba(196, 149, 42, 0.2);
+    border-bottom: 1px solid rgba(196, 149, 42, 0.2);
+  }
+
+  .impact-teal .impact-label {
+    color: rgba(248, 243, 235, 0.6) !important;
+  }
+
+  .impact-teal .impact-sublabel {
+    color: rgba(248, 243, 235, 0.35);
+  }
+
+  .impact-teal .impact-stat-divider {
+    border-top: 1px solid rgba(196, 149, 42, 0.18);
+  }
+
+  @media (min-width: 1024px) {
+    .impact-teal .impact-stat-divider {
+      border-top: none;
+      border-left: 1px solid rgba(196, 149, 42, 0.18);
     }
   }
 </style>

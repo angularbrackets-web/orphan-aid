@@ -70,10 +70,11 @@
   --color-gold-light:     #D4A84B;  /* Pale gold — SVG stroke lines (1px legibility) */
   --color-gold-muted:     #E8D5A3;  /* Muted gold — watermark patterns at low opacity */
 
-  /* Teal — Deep Trust */
-  --color-teal:           #1B3A4B;  /* Deep teal — CTA button + CTA section bg */
-  --color-teal-hover:     #142D3A;  /* Teal dark — button hover state */
-  --color-teal-text:      #FDFAF5;  /* Warm white — text on teal surfaces */
+  /* Forest Green — Option A (Islamic Green #1A3A24) */
+  --color-teal:           #1A3A24;  /* Deep forest green — CTA button + section bg */
+  --color-teal-hover:     #102818;  /* Forest dark — button hover state */
+  --color-teal-text:      #FDFAF5;  /* Warm white — text on dark surfaces */
+  --color-teal-rgb:       26, 58, 36; /* RGB channels for rgba() usage */
 
   /* Semantic */
   --color-success:        #1A5C3A;  /* Form success */

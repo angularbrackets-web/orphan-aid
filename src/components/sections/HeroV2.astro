@@ -1,0 +1,425 @@
+---
+// Hero V2 — Dark green canvas with animated Islamic geometric illustration.
+// Wave transition at bottom dissolves into the parchment QuoteBar.
+---
+
+<section class="hero-v2 relative flex flex-col items-center justify-center" aria-label="Hero">
+
+  <!-- Flowing bezier paths — diagonal organic lines looping across hero -->
+  <svg
+    class="v2-paths absolute inset-0 w-full h-full pointer-events-none"
+    viewBox="0 0 1440 900"
+    preserveAspectRatio="xMidYMid slice"
+    aria-hidden="true"
+  >
+    <path class="fp fp-1" d="M-100,180 C200,80 600,400 900,220 C1100,80 1300,300 1600,200" stroke="#C4952A" stroke-width="1.2" fill="none"/>
+    <path class="fp fp-2" d="M-200,500 C100,300 500,650 900,400 C1200,200 1400,450 1700,350" stroke="#C4952A" stroke-width="0.7" fill="none"/>
+    <path class="fp fp-3" d="M100,-50 C300,250 500,50 800,400 C1000,600 1300,250 1600,500" style="stroke: var(--color-teal-hover)" stroke-width="1.0" fill="none"/>
+    <path class="fp fp-4" d="M-300,750 C100,550 400,800 700,550 C900,400 1200,650 1700,500" stroke="#C4952A" stroke-width="0.9" fill="none"/>
+    <path class="fp fp-5" d="M300,950 C500,700 700,850 1000,600 C1200,450 1400,700 1650,550" style="stroke: var(--color-teal-hover)" stroke-width="0.8" fill="none"/>
+    <path class="fp fp-6" d="M-100,350 C200,500 600,250 1000,480 C1200,600 1400,300 1700,420" stroke="#C4952A" stroke-width="0.6" fill="none"/>
+  </svg>
+
+  <!-- Radial warmth glow — warm gold centre on dark ground -->
+  <div
+    class="absolute inset-0 pointer-events-none"
+    style="background: radial-gradient(ellipse 65% 60% at 50% 46%, rgba(196,149,42,0.13) 0%, transparent 68%);"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Animated Islamic geometric illustration — astrolabe rings -->
+  <div class="v2-illus" aria-hidden="true">
+    <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- Outer ring — rotates clockwise 100s -->
+      <g class="illus-outer">
+        <circle cx="200" cy="200" r="190" stroke="#C4952A" stroke-width="0.4" opacity="0.18"/>
+        <circle cx="200" cy="200" r="174" stroke="#C4952A" stroke-width="0.3" stroke-dasharray="2.5 6" opacity="0.25"/>
+        <!-- 8 cardinal tick marks -->
+        <line x1="200" y1="10"  x2="200" y2="24"  stroke="#C4952A" stroke-width="0.8" opacity="0.3"/>
+        <line x1="390" y1="200" x2="376" y2="200" stroke="#C4952A" stroke-width="0.8" opacity="0.3"/>
+        <line x1="200" y1="390" x2="200" y2="376" stroke="#C4952A" stroke-width="0.8" opacity="0.3"/>
+        <line x1="10"  y1="200" x2="24"  y2="200" stroke="#C4952A" stroke-width="0.8" opacity="0.3"/>
+        <line x1="334" y1="66"  x2="323" y2="77"  stroke="#C4952A" stroke-width="0.6" opacity="0.2"/>
+        <line x1="334" y1="334" x2="323" y2="323" stroke="#C4952A" stroke-width="0.6" opacity="0.2"/>
+        <line x1="66"  y1="334" x2="77"  y2="323" stroke="#C4952A" stroke-width="0.6" opacity="0.2"/>
+        <line x1="66"  y1="66"  x2="77"  y2="77"  stroke="#C4952A" stroke-width="0.6" opacity="0.2"/>
+        <!-- Cross-axis alignment lines -->
+        <line x1="32"  y1="200" x2="368" y2="200" stroke="#C4952A" stroke-width="0.25" opacity="0.12"/>
+        <line x1="200" y1="32"  x2="200" y2="368" stroke="#C4952A" stroke-width="0.25" opacity="0.12"/>
+        <line x1="83"  y1="83"  x2="317" y2="317" stroke="#C4952A" stroke-width="0.2" opacity="0.1"/>
+        <line x1="317" y1="83"  x2="83"  y2="317" stroke="#C4952A" stroke-width="0.2" opacity="0.1"/>
+      </g>
+
+      <!-- Middle ring — 8-pointed star, rotates counter-clockwise 70s -->
+      <g class="illus-middle">
+        <circle cx="200" cy="200" r="140" stroke="#C4952A" stroke-width="0.5" opacity="0.2"/>
+        <!-- 8-pointed star: outer r=140, inner r=58 -->
+        <path
+          d="M200,60 L219,142 L296,96 L250,168 L340,200 L250,232 L296,304 L219,258 L200,340 L181,258 L104,304 L150,232 L60,200 L150,168 L104,96 L181,142 Z"
+          stroke="#C4952A" stroke-width="1.1" fill="rgba(196,149,42,0.03)" opacity="0.55"
+        />
+      </g>
+
+      <!-- Inner element — diamond star, rotates clockwise 38s -->
+      <g class="illus-inner">
+        <circle cx="200" cy="200" r="68" stroke="#C4952A" stroke-width="0.6" stroke-dasharray="3 5" opacity="0.28"/>
+        <!-- 4-point diamond -->
+        <path
+          d="M200,138 L219,181 L262,200 L219,219 L200,262 L181,219 L138,200 L181,181 Z"
+          stroke="#C4952A" stroke-width="1.4" fill="rgba(196,149,42,0.06)" opacity="0.8"
+        />
+        <!-- Centre -->
+        <circle cx="200" cy="200" r="7" stroke="#C4952A" stroke-width="1" opacity="0.5"/>
+        <circle cx="200" cy="200" r="2.5" fill="#C4952A" opacity="0.55"/>
+      </g>
+
+    </svg>
+  </div>
+
+  <!-- Content -->
+  <div class="container relative z-10 flex flex-col items-center text-center py-40 sm:py-48 lg:py-64">
+
+    <!-- Label — charity registration with gold flanking dashes -->
+    <p class="v2-label label mb-10 flex items-center gap-3 justify-center">
+      <svg width="24" height="1" viewBox="0 0 24 1" aria-hidden="true">
+        <line x1="0" y1="0.5" x2="24" y2="0.5" stroke="#C4952A" stroke-width="1"/>
+      </svg>
+      Registered Canadian Charity
+      <svg width="24" height="1" viewBox="0 0 24 1" aria-hidden="true">
+        <line x1="0" y1="0.5" x2="24" y2="0.5" stroke="#C4952A" stroke-width="1"/>
+      </svg>
+    </p>
+
+    <!-- Headline -->
+    <h1 class="v2-headline display mb-0 text-center" style="max-width: 920px;">
+      <span class="v2-line-wrap" style="display:block; overflow:hidden; line-height:inherit;">
+        <span class="v2-line" style="display:block;">Caring for Orphans</span>
+      </span>
+      <span class="v2-line-wrap" style="display:block; overflow:hidden; line-height:inherit;">
+        <em class="v2-line" style="display:block; font-style:italic;">Worldwide.</em>
+      </span>
+    </h1>
+
+    <!-- Gold geometric divider — draws on load -->
+    <div class="v2-geo-divider my-12" aria-hidden="true" style="width: min(480px, 90vw);">
+      <svg viewBox="0 -10 480 22" height="22" width="100%" preserveAspectRatio="none" style="overflow: visible;">
+        <line x1="0"   y1="1" x2="185" y2="1" stroke="#D4A84B" stroke-width="1" class="v2-geo-left"  />
+        <line x1="295" y1="1" x2="480" y2="1" stroke="#D4A84B" stroke-width="1" class="v2-geo-right" />
+        <g transform="translate(240, 1)">
+          <path d="M0,-9 L2.5,-2.5 L9,0 L2.5,2.5 L0,9 L-2.5,2.5 L-9,0 L-2.5,-2.5 Z" stroke="#C4952A" stroke-width="0.8" fill="none" />
+          <path d="M0,-4 L4,0 L0,4 L-4,0 Z" stroke="#C4952A" stroke-width="0.5" fill="none" opacity="0.6" />
+        </g>
+      </svg>
+    </div>
+
+    <!-- Sub-headline -->
+    <p class="v2-sub font-body text-center mb-14" style="font-size: 1.0625rem; line-height: 1.7; max-width: 500px;">
+      Providing vital care, education, and support for orphaned children worldwide.
+      A monthly commitment that continues to give.
+    </p>
+
+    <!-- CTAs -->
+    <div class="v2-ctas flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="/sponsor" class="v2-btn-primary" aria-label="Sponsor an Orphan — begin your monthly commitment">
+        <span class="btn-slide" aria-hidden="true"></span>
+        <span class="relative z-10">Sponsor an Orphan</span>
+      </a>
+      <a href="/about" class="v2-btn-ghost" aria-label="Learn more about Orphan Aid">
+        Learn about us
+      </a>
+    </div>
+
+    <p class="v2-trust-note" aria-label="Starting at $35 Canadian dollars per month">
+      From $35 CAD / month · Tax receipts provided
+    </p>
+
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-10 v2-scroll" aria-hidden="true">
+    <div class="v2-scroll-line">
+      <div class="v2-scroll-dot"></div>
+    </div>
+  </div>
+
+  <!-- Wave transition — dissolves dark green into parchment -->
+  <div class="v2-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,88 L0,44 C240,4 480,72 720,40 C960,8 1200,64 1440,36 L1440,88 Z" fill="#F8F3EB"/>
+    </svg>
+  </div>
+
+</section>
+
+<style>
+  .hero-v2 {
+    min-height: 100svh;
+    background-color: var(--color-teal);
+  }
+
+  /* ── Illustration ───────────────────────────────────────── */
+  .v2-illus {
+    position: absolute;
+    right: clamp(-60px, calc(50vw - 660px), 40px);
+    top: 50%;
+    transform: translateY(-54%);
+    width: clamp(260px, 28vw, 400px);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.55;
+  }
+
+  @media (max-width: 1023px) {
+    .v2-illus {
+      right: -80px;
+      width: 220px;
+      opacity: 0.2;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .v2-illus {
+      display: none;
+    }
+  }
+
+  .illus-outer  { transform-origin: 200px 200px; animation: illus-cw  100s linear infinite; }
+  .illus-middle { transform-origin: 200px 200px; animation: illus-ccw  70s linear infinite; }
+  .illus-inner  { transform-origin: 200px 200px; animation: illus-cw   38s linear infinite; }
+
+  @keyframes illus-cw  { to { transform: rotate(360deg);  } }
+  @keyframes illus-ccw { to { transform: rotate(-360deg); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .illus-outer, .illus-middle, .illus-inner { animation: none; }
+  }
+
+  /* ── Flowing paths ──────────────────────────────────────── */
+  .fp { fill: none; }
+  .fp-1 { opacity: 0.06; }
+  .fp-2 { opacity: 0.045; }
+  .fp-3 { opacity: 0.07; }
+  .fp-4 { opacity: 0.05; }
+  .fp-5 { opacity: 0.055; }
+  .fp-6 { opacity: 0.04; }
+
+  /* ── Text — light on dark ───────────────────────────────── */
+  .v2-headline {
+    color: #FDFAF5;
+    font-family: var(--font-heading);
+  }
+
+  .v2-headline em {
+    color: var(--color-gold-DEFAULT, #C4952A);
+    font-style: italic;
+  }
+
+  .v2-label {
+    color: rgba(253, 250, 245, 0.5);
+  }
+
+  .v2-sub {
+    color: rgba(253, 250, 245, 0.7);
+  }
+
+  .v2-trust-note {
+    margin-top: 20px;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: rgba(253, 250, 245, 0.36);
+  }
+
+  /* ── Geo divider lines ──────────────────────────────────── */
+  .v2-geo-left {
+    stroke-dasharray: 185;
+    stroke-dashoffset: 185;
+  }
+  .v2-geo-right {
+    stroke-dasharray: 185;
+    stroke-dashoffset: 185;
+  }
+
+  /* ── Primary button — gold on dark green ────────────────── */
+  .v2-btn-primary {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2.25rem;
+    background-color: var(--color-gold-DEFAULT, #C4952A);
+    color: #1C1208;
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    overflow: hidden;
+    min-width: 210px;
+  }
+
+  .btn-slide {
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-gold-light, #D4A84B);
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .v2-btn-primary:hover .btn-slide {
+    clip-path: inset(0 0% 0 0);
+  }
+
+  /* ── Ghost button — cream on dark green ─────────────────── */
+  .v2-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc(1rem - 1px) calc(2.25rem - 1px);
+    background-color: transparent;
+    color: rgba(253, 250, 245, 0.75);
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    border: 1px solid rgba(253, 250, 245, 0.22);
+    min-width: 210px;
+    transition: border-color 200ms var(--ease-out-quart),
+                color 200ms var(--ease-out-quart);
+  }
+
+  .v2-btn-ghost:hover {
+    border-color: rgba(253, 250, 245, 0.55);
+    color: #FDFAF5;
+  }
+
+  /* ── Scroll indicator ───────────────────────────────────── */
+  .v2-scroll-line {
+    width: 1px;
+    height: 60px;
+    background-color: rgba(196, 149, 42, 0.25);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .v2-scroll-dot {
+    width: 100%;
+    height: 50%;
+    background-color: var(--color-gold);
+    animation: scroll-drop-v2 1.8s ease-in-out infinite;
+  }
+
+  @keyframes scroll-drop-v2 {
+    0%   { transform: translateY(-100%); }
+    50%  { transform: translateY(100%); }
+    100% { transform: translateY(200%); }
+  }
+
+  /* ── Wave transition ────────────────────────────────────── */
+  .v2-wave {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .v2-wave svg {
+    display: block;
+    width: 100%;
+    height: clamp(48px, 6vw, 88px);
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap'
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  if (!prefersReducedMotion) {
+    const tl = gsap.timeline({ delay: 0.15 })
+
+    // Illustration fades in alongside headline
+    tl.fromTo('.v2-illus',
+      { opacity: 0, scale: 0.92 },
+      { opacity: 0.55, scale: 1, duration: 1.4, ease: 'power2.out' },
+      0
+    )
+    .fromTo('.v2-label',
+      { opacity: 0, y: 14 },
+      { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' },
+      0.2
+    )
+    .fromTo('.v2-line',
+      { y: '108%' },
+      { y: '0%', duration: 0.9, ease: 'power4.out', stagger: 0.14 },
+      '-=0.35'
+    )
+    .fromTo('.v2-sub',
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' },
+      '-=0.3'
+    )
+    .fromTo('.v2-ctas',
+      { opacity: 0, y: 12 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
+      '-=0.3'
+    )
+    .fromTo('.v2-trust-note',
+      { opacity: 0 },
+      { opacity: 1, duration: 0.5, ease: 'power2.out' },
+      '-=0.2'
+    )
+    .fromTo('.v2-scroll',
+      { opacity: 0 },
+      { opacity: 1, duration: 0.5, ease: 'power2.out' },
+      '-=0.2'
+    )
+
+    // Geo divider lines draw
+    gsap.to('.v2-geo-left',  { strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut', delay: 0.85 })
+    gsap.to('.v2-geo-right', { strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut', delay: 1.0 })
+
+    // Scroll-exit: content rises and fades as hero scrolls out
+    gsap.to('.hero-v2 .container', {
+      y: -70, opacity: 0.4, ease: 'none',
+      scrollTrigger: { trigger: '.hero-v2', start: 'top top', end: 'bottom top', scrub: 0.8 },
+    })
+
+    // Illustration drifts up slightly on scroll
+    gsap.to('.v2-illus', {
+      y: -40, ease: 'none',
+      scrollTrigger: { trigger: '.hero-v2', start: 'top top', end: 'bottom top', scrub: 1.2 },
+    })
+
+    // Flowing bezier paths — continuous strokeDashoffset loop
+    const fps = gsap.utils.toArray<SVGPathElement>('.fp')
+    const fpDurations = [22, 28, 18, 25, 20, 30]
+    fps.forEach((fp, i) => {
+      const len = fp.getTotalLength()
+      gsap.set(fp, { strokeDasharray: len, strokeDashoffset: len })
+      gsap.to(fp, { strokeDashoffset: -len, duration: fpDurations[i] ?? 22, ease: 'none', repeat: -1, delay: i * 3.5 })
+    })
+
+    // Magnetic CTA
+    const btn = document.querySelector('.v2-btn-primary') as HTMLElement | null
+    if (btn) {
+      btn.addEventListener('mousemove', (e: MouseEvent) => {
+        const r = btn.getBoundingClientRect()
+        const px = (e.clientX - r.left - r.width / 2) / r.width * 8
+        const py = (e.clientY - r.top - r.height / 2) / r.height * 8
+        gsap.to(btn, { x: px, y: py, duration: 0.35, ease: 'power2.out' })
+      })
+      btn.addEventListener('mouseleave', () => {
+        gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'power3.out' })
+      })
+    }
+  }
+</script>

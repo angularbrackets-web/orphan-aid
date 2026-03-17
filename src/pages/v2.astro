@@ -1,10 +1,8 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import HeroV2 from '@/components/sections/HeroV2.astro'
-import QuoteBar from '@/components/sections/QuoteBar.astro'
 import ImpactStats from '@/components/sections/ImpactStats.astro'
 import StoryRows from '@/components/sections/StoryRows.astro'
-import DisplayMoment from '@/components/sections/DisplayMoment.astro'
 import ChildProfiles from '@/components/sections/ChildProfiles.astro'
 import AmountPickerSection from '@/components/sections/AmountPickerSection.astro'
 import DonorTestimonials from '@/components/sections/DonorTestimonials.astro'
@@ -12,15 +10,13 @@ import CovenantCTAV2 from '@/components/sections/CovenantCTAV2.astro'
 ---
 
 <Layout
-  title="Home"
+  title="Home — V2"
   description="Sponsor an orphan and give a child consistent care, education, and hope. Orphan Aid is a registered Canadian charity with full tax receipts. From $35/month."
-  canonical="/"
+  canonical="/v2"
 >
   <HeroV2 />
-  <QuoteBar />
-  <ImpactStats variant="gold-band" />
+  <ImpactStats variant="light" />
   <StoryRows />
-  <DisplayMoment />
   <ChildProfiles />
   <AmountPickerSection />
   <DonorTestimonials />

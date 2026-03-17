@@ -1,0 +1,306 @@
+---
+// Story Rows — Alternating editorial image/text pairs.
+// Replaces CovenantSection's pull-quote + 3-column layout.
+// Each program pillar gets a full editorial moment.
+
+const rows = [
+  {
+    icon: 'education',
+    label: 'Education',
+    heading: 'A door to learning that never closes.',
+    body: 'Every sponsorship covers school fees, uniforms, and learning materials — ensuring no child misses a year of education because of circumstance.',
+    image: {
+      src: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=900&q=85&auto=format&fit=crop',
+      alt: 'A child engaged in reading and learning.',
+    },
+    reverse: false,
+  },
+  {
+    icon: 'healthcare',
+    label: 'Healthcare',
+    heading: 'Care that goes beyond the crisis.',
+    body: 'Monthly check-ups, vaccinations, and medical support — because a healthy child is a child who can dream.',
+    image: {
+      src: 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=900&q=85&auto=format&fit=crop',
+      alt: 'Compassionate healthcare support for a child.',
+    },
+    reverse: true,
+  },
+  {
+    icon: 'dailycare',
+    label: 'Daily Care',
+    heading: 'The quiet constancy of being provided for.',
+    body: 'Nutritious meals, clean clothing, and safe shelter — the basics that every child deserves, delivered with dignity.',
+    image: {
+      src: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=900&q=85&auto=format&fit=crop',
+      alt: 'Children supported with warm care and daily nourishment.',
+    },
+    reverse: false,
+  },
+]
+
+// SVG icons for each pillar — sacred geometric forms
+const icons: Record<string, string> = {
+  education: `<path d="M14 2L16.5 7.5L22 8.3L18 12.1L19 17.6L14 15L9 17.6L10 12.1L6 8.3L11.5 7.5Z" stroke="#C4952A" stroke-width="1.2" fill="none"/>`,
+  healthcare: `<path d="M14 4L10 4L10 10L4 10L4 14L10 14L10 20L14 20L14 14L20 14L20 10L14 10Z" stroke="#C4952A" stroke-width="1.2" fill="none"/>
+               <rect x="4" y="4" width="16" height="16" stroke="#C4952A" stroke-width="0.6" fill="none" opacity="0.4" transform="rotate(45 12 12)"/>`,
+  dailycare: `<path d="M12 3L13.8 8.6H20L14.8 11.9L16.7 17.5L12 14.2L7.3 17.5L9.2 11.9L4 8.6H10.2Z" stroke="#C4952A" stroke-width="1.2" fill="none"/>
+              <circle cx="12" cy="12" r="5" stroke="#C4952A" stroke-width="0.5" fill="none" opacity="0.4"/>`,
+}
+---
+
+<section class="story-rows-section" aria-label="What your sponsorship covers">
+
+  {rows.map((row, i) => (
+    <div class={`story-row aos ${row.reverse ? 'story-row-reverse' : ''}`} data-delay="0">
+
+      <!-- Text panel -->
+      <div class="story-text">
+        <!-- Icon -->
+        <div class="story-icon-wrap" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+            set:html={icons[row.icon]}
+          />
+        </div>
+
+        <!-- Label -->
+        <p class="label story-label mt-4 mb-5">{row.label}</p>
+
+        <!-- Heading -->
+        <h2 class="h2 story-heading mb-6">{row.heading}</h2>
+
+        <!-- Body -->
+        <p class="font-body text-ink-secondary story-body">{row.body}</p>
+      </div>
+
+      <!-- Photo panel -->
+      <div class="story-photo-wrap">
+        <img
+          src={row.image.src}
+          alt={row.image.alt}
+          class="story-photo"
+          loading={i === 0 ? 'eager' : 'lazy'}
+          decoding="async"
+        />
+        <!-- Subtle gold corner accent -->
+        <div class="story-photo-corner" aria-hidden="true"></div>
+      </div>
+
+    </div>
+  ))}
+
+  <!-- Full-width gold divider between each row is handled by CSS border-top -->
+
+</section>
+
+<style>
+  .story-rows-section {
+    background-color: var(--color-bg);
+  }
+
+  /* Row — 50/50 grid on desktop, stacked on mobile */
+  .story-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  @media (min-width: 1024px) {
+    .story-row {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      min-height: 580px;
+    }
+
+    .story-row-reverse .story-text { order: 2; }
+    .story-row-reverse .story-photo-wrap { order: 1; }
+  }
+
+  /* Divider between rows */
+  .story-row + .story-row {
+    border-top: 1px solid rgba(196, 149, 42, 0.12);
+  }
+
+  /* Text panel */
+  .story-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 2rem;
+    order: 2;
+  }
+
+  @media (min-width: 1024px) {
+    .story-text {
+      padding: 6rem 5rem;
+      order: initial;
+    }
+
+    .story-row-reverse .story-text {
+      padding-left: 5rem;
+      padding-right: 4rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .story-text {
+      padding: 7rem 6rem;
+    }
+  }
+
+  .story-label {
+    color: var(--color-ink-secondary);
+  }
+
+  .story-heading {
+    max-width: 13ch;
+  }
+
+  .story-body {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    max-width: 42ch;
+  }
+
+  /* Photo panel */
+  .story-photo-wrap {
+    position: relative;
+    order: 1;
+    overflow: hidden;
+    min-height: 300px;
+  }
+
+  @media (min-width: 1024px) {
+    .story-photo-wrap {
+      order: initial;
+      min-height: auto;
+    }
+  }
+
+  .story-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    /* Mobile: fixed aspect ratio */
+    aspect-ratio: 16 / 9;
+    will-change: transform;
+  }
+
+  @media (min-width: 1024px) {
+    .story-photo {
+      position: absolute;
+      inset: auto;
+      top: -10%;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 120%;
+      aspect-ratio: unset;
+    }
+  }
+
+  /* Subtle gold corner accent */
+  .story-photo-corner {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 48px;
+    height: 48px;
+    border-right: 1px solid rgba(196, 149, 42, 0.4);
+    border-bottom: 1px solid rgba(196, 149, 42, 0.4);
+    pointer-events: none;
+  }
+
+  .story-row-reverse .story-photo-corner {
+    right: auto;
+    left: 0;
+    border-right: none;
+    border-left: 1px solid rgba(196, 149, 42, 0.4);
+  }
+
+  /* Icon wrapper */
+  .story-icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(196, 149, 42, 0.3);
+    border-radius: 2px;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  if (!prefersReducedMotion) {
+    document.querySelectorAll('.story-row').forEach((row) => {
+      const icon = row.querySelector('.story-icon-wrap')
+      const label = row.querySelector('.story-label')
+      const heading = row.querySelector('.story-heading')
+      const body = row.querySelector('.story-body')
+      const photo = row.querySelector('.story-photo')
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: row,
+          start: 'top 75%',
+          once: true,
+        },
+      })
+
+      tl.fromTo([icon, label],
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.55, ease: 'power3.out', stagger: 0.07 },
+        0
+      )
+      .fromTo(heading,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.65, ease: 'power3.out' },
+        '-=0.3'
+      )
+      .fromTo(body,
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
+        '-=0.35'
+      )
+
+      // Determine slide direction based on row layout
+      const isReverse = row.classList.contains('story-row-reverse')
+      const photoEnterX = isReverse ? '-5%' : '5%'
+
+      // Photo: entrance (fade + slide from side + scale)
+      gsap.fromTo(photo,
+        { opacity: 0, x: photoEnterX, scale: 1.05 },
+        {
+          opacity: 1,
+          x: '0%',
+          scale: 1.0,
+          duration: 1.1,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: row, start: 'top 80%', once: true },
+        }
+      )
+
+      // Continuous parallax scrub — slightly stronger for more visible effect
+      gsap.fromTo(photo,
+        { y: '10%' },
+        {
+          y: '-10%',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: row,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.2,
+          },
+        }
+      )
+    })
+  }
+</script>

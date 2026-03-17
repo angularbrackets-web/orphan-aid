@@ -1,0 +1,77 @@
+---
+// DonorTestimonials — React testimonial island wrapped in a blob-decorated section.
+import { TestimonialsSection } from '@/components/ui/testimonial-v2'
+---
+
+<div class="testimonials-blob-wrap">
+  <!-- Decorative background blobs -->
+  <div class="test-blob test-blob-1" aria-hidden="true"></div>
+  <div class="test-blob test-blob-2" aria-hidden="true"></div>
+  <div class="test-blob test-blob-3" aria-hidden="true"></div>
+
+  <TestimonialsSection client:visible />
+</div>
+
+<style>
+  .testimonials-blob-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .test-blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(70px);
+    animation: test-blob-drift 24s ease-in-out infinite;
+  }
+
+  .test-blob-1 {
+    width: 440px;
+    height: 440px;
+    background: radial-gradient(circle, rgba(196, 149, 42, 0.10) 0%, transparent 70%);
+    top: -80px;
+    left: -100px;
+    animation-duration: 30s;
+  }
+
+  .test-blob-2 {
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(26, 58, 36, 0.07) 0%, transparent 70%);
+    bottom: -60px;
+    right: -60px;
+    animation-duration: 22s;
+    animation-delay: -12s;
+  }
+
+  .test-blob-3 {
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(196, 149, 42, 0.07) 0%, transparent 70%);
+    top: 50%;
+    right: 20%;
+    transform: translateY(-50%);
+    animation-duration: 18s;
+    animation-delay: -7s;
+  }
+
+  @keyframes test-blob-drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%        { transform: translate(20px, -18px) scale(1.06); }
+    66%        { transform: translate(-15px, 15px) scale(0.93); }
+  }
+
+  .test-blob-3 {
+    animation-name: test-blob-drift-mid;
+  }
+
+  @keyframes test-blob-drift-mid {
+    0%, 100% { transform: translateY(-50%) scale(1); }
+    50%        { transform: translateY(-50%) scale(1.12); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .test-blob { animation: none; }
+  }
+</style>
